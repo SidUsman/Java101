@@ -177,7 +177,6 @@ Although Numeric values should not be inclosed in quotes.
 |Operators | Discription |
 |---|---|
 | = | Equal |
-
 |!=|Not Equal
 | <>| Not Equal|
 | >|Greater than  |
@@ -188,4 +187,8 @@ Although Numeric values should not be inclosed in quotes.
 |LIKE|Search for a pattern|
 |IN|If you know the exact value you want to return for at least one of the columns
 
+
+### SQL Joins
+
+![sql joins](sql-assets/SQL_Joins.svg)
 
