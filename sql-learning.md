@@ -190,5 +190,5 @@ Although Numeric values should not be inclosed in quotes.
 
 ### SQL Joins
 
-![sql joins](sql-assets/SQL_Joins.svg)
+![sql joins](sql-assets/SQL_Joins.png)
 
