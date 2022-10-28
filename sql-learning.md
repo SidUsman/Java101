@@ -112,7 +112,7 @@ EXAMPLE: the "Persons" table
 
 
 ##### ⇒  Select statment will be as:
-SELECT LastName, FirstName FROM Persons
+`SELECT LastName, FirstName FROM Persons` </br>
 result-set will be as :
 
 | LastName  |FirstName   |
@@ -123,8 +123,10 @@ result-set will be as :
 
 ##### ⇒  Select * Example:
 
- SELECT  *  From Persons
+ `SELECT  *  From Persons`
+
  Result will be as :
+
  |P_Id  | LastName  |FirstName   | Address  | City |
 |---|---|---|---|---|
 | 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
@@ -133,29 +135,34 @@ result-set will be as :
 
 ----
 #### SQL SELECT DISTINCT Example
-useing the "Persons" table 
+using the "Persons" table 
 
 SELECT DISTINCT City FROM Persons
 
 Result-set  will be like:
-|City |
-|--|
-|Sandnes  |
+
+
+|City|
+|---|
+| Sandnes  |
 |Stavanger|
 
 ----
 #### SQL WHERE Clause
 **SYNTAX** :
-				SELECT column_name(s)
-				FROM table_name 
-				WHERE column_name operator value
-				
-useing the "Person" table 
-
+```				
+	SELECT column_name(s)
+	FROM table_name 
+	WHERE column_name operator value			
+     
+ ```
+using the "Person" table
+```
 SELECT * FROM Persons
 WHERE City  =  'Sadnes'
-
+```
 result-set :
+
 |P_Id  | LastName  |FirstName   | Address  | City |
 |---|---|---|---|---|
 | 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
@@ -166,9 +173,11 @@ SQL use single quotes around text values , most database systems will also accep
 Although Numeric values should not be inclosed in quotes.
 
 **Operators Allowed in the WHERE Clause**
+
 |Operators | Discription |
-|--|--|
+|---|---|
 | = | Equal |
+
 |!=|Not Equal
 | <>| Not Equal|
 | >|Greater than  |
