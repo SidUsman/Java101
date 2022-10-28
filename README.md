@@ -1,8 +1,2 @@
-# Java101
-# Java101
-# Java101
-# Java101
-# Java101
-# Java101
-# Java101
-# Java101
+# Project Details
+- Here i will put notes about all my projects
