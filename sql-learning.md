@@ -2,7 +2,7 @@
 
 STRUCTURED QUERY LANGUAGE 
 ========
-### Introdcction:
+### Introduction:
 
 SQL is a standard language for accessing and manipulating relational databases.
 
@@ -14,25 +14,25 @@ SQL is a standard language for accessing and manipulating relational databases.
 - SQL is an ANSI (American National Standards Institute ) standard
 ---
 #### What can SQL do ?
-- excecuate queries against a database
-- retrive data from a database
+- execute queries against a database
+- retrieve data from a database
 - insert records ina database
 - update records in database
 - delete records in database
 - create new database
-- create new tables in databse
+- create new tables in database
 - create stored procedures in a database
-- creat views in database
+- create views in database
 - set permissions on tables, procedures and views
 -----
 #### SQL is Standard -BUT...
 
-Although SQL is an ANSI standard, there are many different versions of the SQL language. However, to be compliant with the ANSI standard they all support at least the major commands (SELECT, UPDATE, DELETE, INSERT, WHERE ) in a similar manner. 
+Although SQL is an ANSI standard, there are many versions of the SQL language. However, to be compliant with the ANSI standard they all support at least the major commands (SELECT, UPDATE, DELETE, INSERT, WHERE ) in a similar manner. 
 
 ---
 #### Using SQL in your Website
 
-Tobuild a website that shows some data from a database, need the following
+To build a website that shows some data from a database, need the following
 
 - An RDBMS database program (MS Access, SQL server, MySQL)
 - A server-side scripting language(PHP , ASP)
@@ -43,7 +43,7 @@ Tobuild a website that shows some data from a database, need the following
 RDBMS stands for relational database management system .
 RDBMS is the basis for SQL and all modern database systems like MS SQL server, IBM DB2, Oracle, MySQL and Microsoft Access.
 The data in RDBMS is stored in database objects called **tables**.
-A table is a collection of related data and it consists of **columns** and **rows**.
+A table is a collection of related data, and it consists of **columns** and **rows**.
 
 #### Database Tables:
 A database most often contains one or more tables. Each table is identified by a name (e.g. "Customers" or "orders"). Tables contain records(rows) with data. Example table called "Persons" is below:
@@ -58,13 +58,15 @@ The table above contains three records, one for each person and five columns .
 
 ----
 #### SQL Statements 
-Most of the actions you need to perform on a data base are done with SQL Statements.
-For example the following SQL Statement will select all the records in a the "Persons" table.
-*SELECT * FROM Persons*
+Most of the actions you need to perform on a database are done with SQL Statements.
+For example the following SQL Statement will select all the records in the "Persons" table.
+````
+SELECT * FROM Persons
+````
 Note: (SQL is not Case Senstive)
 
 #### Semicolon ( ; ) after SQL Statement 
-Some database require a semicolon at the end of each SQL Statement .
+Some databases require a semicolon at the end of each SQL Statement .
 Semicolon is a standard way to separate each SQL statement in a database system that allows more than one SQL statement to be executed in the same call to the server.
 
 ----
@@ -73,21 +75,21 @@ SQL can be divided into two parts:
 - DML = The Data Manipulation Language 
 - DDL = The Data Definition Language 
 
-1. The query and update commands from the DML part of SQL:
+1. The query and update commands from the **DML** part of SQL:
 
  - **SELECT** - extract data from databases 
  - **UPDATE** - updates data in a database
  - **DELETE** - deletes data from  a database 
  - **INSERT INTO** - inserts data into database
 
-2. The DDL part of SQL permits database tables to be created or deleted. It also define indexes(keys), specify links between tables and impose constraints between tables. The most important DDL statements in SQL are:
- - CREATE DATABASE - crates a new database 
- - ALTER DATABASE - modifies a database
- - CREAT TABLE -  creat a new table
- - ALTER TABLE - modifies a table
- - DROP TABLE - delete a table
- - CREATE INDEX - creat an index (search key)
- - DROP INDEX - delete an index 
+2. The **DDL** part of SQL permits database tables to be created or deleted. It also defines indexes(keys), specify links between tables and impose constraints between tables. The most important DDL statements in SQL are:
+ - **CREATE DATABASE** - crates a new database 
+ - **ALTER DATABASE** - modifies a database
+ - **CREATE TABLE** -  create a new table
+ - **ALTER TABLE** - modifies a table
+ - **DROP TABLE** - delete a table
+ - **CREATE INDEX** - create an index (search key)
+ - **DROP INDEX** - delete an index 
 
 
 ####  SQL SELECT Statement 
@@ -111,7 +113,7 @@ EXAMPLE: the "Persons" table
 |3 |Pettersen|Kari|Storgt 20|Stavanger|
 
 
-##### ⇒  Select statment will be as:
+##### ⇒  Select statement will be as:
 `SELECT LastName, FirstName FROM Persons` </br>
 result-set will be as :
 
@@ -170,11 +172,11 @@ result-set :
 
 ==> Quotes Around TEXT Fields 
 SQL use single quotes around text values , most database systems will also accept double quotes .
-Although Numeric values should not be inclosed in quotes.
+Although Numeric values should not be enclosed in quotes.
 
 **Operators Allowed in the WHERE Clause**
 
-|Operators | Discription |
+|Operators | Description |
 |---|---|
 | = | Equal |
 |!=|Not Equal
@@ -183,9 +185,191 @@ Although Numeric values should not be inclosed in quotes.
 | <|Less than  |
 |>= |Greater than or Equal |
 |<=|Less than or Equal|
-|BTWEEN|Between an inclusive range|
+|BETWEEN|Between an inclusive range|
 |LIKE|Search for a pattern|
 |IN|If you know the exact value you want to return for at least one of the columns
+
+#### SQL AND & OR Operators 
+The AND & OR operators are used to filter records based on more than one conditions.
+The AND operator displays a record if both the first condition and the second condition is true.
+The OR operator displays a record if either the first or the second condition is true.
+
+using the "Persons" table
+
+AND Example :
+````
+SELECT * FROM Persons
+WHERE FirstName = 'Tove'
+AND LastName = 'Svendson'
+````
+The result-set will be like:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+
+OR Example:
+````
+SELECT * FROM Persons 
+WHERE FirstName = 'Tove'
+OR FirstName = 'Ola'
+````
+result-set will look like this:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+
+
+### The ORDER BY Keyword
+The ORDER BY Keyword is used to sort the result-set by a specified column.
+The ORDER BY keyword sort the records in ascending order by default. To sort in descending order ,DESC keyword is used.
+
+**Syntax for ORDER BY:**
+
+````
+SELECT column_name(s)
+From table_name
+ORDER BY column_name(s) ASC|DESC
+````
+
+"Persons" table.
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+
+````
+SELECT * 
+FROM Persons
+ORDER BY LastName
+````
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+
+**ORDER BY DESC Example**
+````
+SELECT * 
+FROM Persons
+ORDER BY LastName DESC
+````
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+
+----
+###The INSERT INTO Statement
+
+The INSERT INTO Statement is used to insert a new row in a table.
+
+It is possible to write the INSERT INTO statement in two forms.
+
+1. This form does not specify the column names where the data will be inserted, only their values:
+````
+INSERT INTO table_name
+VALUES(value1, value2, value3,...)
+````
+2. The second form specifies both the column names and the values to be inserted:
+````
+INSERT INTO table_name(column1, column2, column3,...)
+VALUES(value1, value2, value3,...)
+````
+**Example:**
+Persons table
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+Syntax:
+````
+INSERT INTO Persons
+VALUE (4,'Nilsen','johan','Bakken 2',Stavanger')
+````
+result-set :
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+
+
+**Insert Data Only in Specified Columns**
+````
+INSERT INTO Persons (P_Id,LstName,FirstName)
+VALUE(5,'Tjessem','Jakob')
+````
+Result-set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+|5|TJessem|Jakob|   |   |
+
+----
+### SQL UPDATE Statement
+The UPDATE Statement is used to update records in a table or to update existing records in a table.
+**UPDATE Syntax**
+````
+UPDATE table_name
+SET column1 = value, column2 = value,...
+WHERE some_column = some_value
+````
+NOTE: WHERE clause specifies which record should be updated.
+
+Example:
+Update the person "Tjessem" in the "persons" table.
+````
+UPDATE Persons
+SET Address = 'Nissestien 67',City = 'Sandnes'
+WHERE LastName = 'Tjessem' AND FirstName = 'Jakob'
+````
+
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+|5|TJessem|Jakob|Nissestien 67 |Sandnes|
+
+Example:
+Updating whole columns of Address and City
+````
+UPDATE Persons
+SET Address = 'Nissestien 67',City = 'Sandnes'
+````
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Nissestien 67 |Sandnes |
+|2 |Svendson |Tove |Nissestien 67 |Sandnes|
+|3 |Pettersen|Kari|Nissestien 67 |Sandnes|
+|4 |Nilsen |Tom |Nissestien 67 |Sandnes|
+|5|TJessem|Jakob|Nissestien 67 |Sandnes|
+
+----
+### SQL DELETE Statement 
+
+
 
 
 ### SQL Joins
