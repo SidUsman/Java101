@@ -369,10 +369,312 @@ SET Address = 'Nissestien 67',City = 'Sandnes'
 ----
 ### SQL DELETE Statement 
 
+The DELETE statement is used to delete records(rows) in a table.
+**Syntax**
+````
+DELETE FROM table_name
+WHERE some_column = some_value
+"where clause specifies which record should be deleted"
+````
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+|5|Tjessem|Jakob|Nissestien 67 |Sandnes|
 
+Example:
+Delete the person "Tjessesm,Jakob" in the persons table
+````
+DELETE FROM Persons 
+WHERE LastName = 'Tjessem' AND FirstName = 'Jakob'
+````
+Result_set:
 
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
 
-### SQL Joins
+**DELETE ALL ROWS**
+````
+DELETE FROM table_name
+or
+DELETE * FROM table_name
+````
+----
+### The TOP Clause
+The TOP Clause is used to specify the number of records to return.
+The Top clause can be very useful on large tables with thouseds of records. Returning a large number of records can impact on performance.
+Not all database system support the TOP clause.
 
-![sql joins](sql-assets/SQL_Joins.png)
+**SQL Server Syntax**
+````
+SELECT TOP number|percent column_name(s)
+FROM table_name
+````
+-------
+### SQL SELECT TOP Equivalent in My SQL and Oracle
+#### MySQL Syntax
+````
+SELECT column_name(S)
+FROM table_name
+LIMIT number
+
+**Example**
+SELECT *
+FROM Persons
+LIMIT 5
+````
+**Oracle Syntax**
+````
+SELECT column_name(s)
+FROM table_name
+WHERE ROWNUM <= number 
+
+**Example**
+
+SELECT *
+FROM Person WHERE ROWNUM <= 5
+````
+--------
+#### SQL TOP Example
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+````
+SELECT TOP 2 * FROM Persons
+````
+RESULT-SET:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+
+-----
+#### SQL TOP PERCENT Example
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+````
+SELECT TOP 50 PERCENT * FROM Persons
+````
+Result-set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+-------
+### SQL LIKE Operator
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+````
+SELECT column_name(s)
+FROM table_name
+WHERE column_name LIKE pattern
+````
+Example:
+persons table:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+````
+SELECT * FROM persons
+WHERE City LIKE 's%'
+
+(The % sign can be used to define wildcards /missing letters in the pattern) both before and after the pattern.
+````
+Result-set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+
+````
+SELECT * FROM Persons
+WHERE City LIKE '%S'
+````
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+````
+SELECT * FROM Persons
+WHERE City like '%tav%'
+````
+Result-set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+````
+SELECT *FROM Persons
+WHERE City NOT LIKE '%tav%'
+````
+Result-set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+
+-----
+### SQL Wildcards
+SQL wildcards can be used when searching for data in a database.
+SQL wildcards must be used with the SQL LIKE operator.
+SQL wildcards can be substituted for one or more character when searching for a data in a database.
+
+|Wildcard|Description|
+|---|---|
+|%|A substitute for a zero or more characters|
+|-|a substitute for exactly one character |
+|[charlist]|Any single character in charlist|
+|[^charlist]|Any single character not in charlist|
+|[!charlist]|Any single character not in charlist|
+
+Persons table:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+
+Example syntax:
+````
+SELECT * FROM persons
+WHERE LastName LIKE 'S_end_on'
+````
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+````
+SELECT *FROM Persons
+WHERE LastName LIKE '[bsp]%'
+````
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+
+````
+SELECT *FROM Persons
+WHERE LastName LIKE '[!bsp]%'
+````
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+
+-----
+### SQL IN Operator 
+The IN operator allows you to specify multiple values in a WHERE clause.
+````
+SELECT colum_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2,...)
+````
+Persons table:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+````
+SELECT *
+FROM Persons
+WHERE LastName IN ('Hansen','Pettersen')
+````
+result-set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+-------
+### SQL BETWEEN Operator
+The BETWEEN Operator is used in a WHERE clause to select a range of data between two values.
+The values can be numbers, text or dates.
+````
+SELECT colum_name(s)
+FROM table_name
+WHERE column_name 
+BETWEEN value1 AND value2
+````
+Persons table:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+|4 |Nilsen |Tom | Vingvn 23|Stavanger|
+````
+SELECT *
+FROM Person
+WHERE LastName 
+BETWEEN 'Hansen' AND 'Pettersen'
+````
+Result set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+
+NOTE:-
+The BETWEEN operator is treated differently in different databases.
+In some databases' person with the last_name of "Hansen" or "Pettersen" will not be listed because the BETWEEN operator only selects fields that are between and excluding the test values.
+In other databases' person with the LastName of "Hansen" or "Pettersen" will be listed because the BETWEEN operator selects fields that are between and including the test values.
+In some databases person with the LastName of "Hansen" will be listed but "Pettersen" will not be listed like example above because the BETWEEN operator selects fields between the test values, including the first value and excluding the last test value.
+Therefore, it is better to check how a database treats the BETWEEN operator.
+
+Example:
+````
+SELECT * FROM Persons
+WHERE LastName 
+NOT BETWEEN 'Hansen' AND 'Pettersen'
+````
+result-set:
+
+|P_Id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+-------
+### SQL Alias
+With SQL an alias name can be given to a table or a column. This can be a good thing to do if you have a very long or complex table name or column names. An alias name could be anything but usually it is short.
+````
+** Aias syntax for tables**
+
+SELECT column_name(s)
+FROM table_name
+AS alias_name
+
+**Alias syntax for cloumns**
+SELECT column_name AS alias_name
+FROM table_name
+````
+
+[sql joins](sql-assets/SQL_Joins.png)
 
