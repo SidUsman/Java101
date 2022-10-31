@@ -665,16 +665,244 @@ result-set:
 ### SQL Alias
 With SQL an alias name can be given to a table or a column. This can be a good thing to do if you have a very long or complex table name or column names. An alias name could be anything but usually it is short.
 ````
-** Aias syntax for tables**
+Aias syntax for tables
 
 SELECT column_name(s)
 FROM table_name
 AS alias_name
 
-**Alias syntax for cloumns**
+Alias syntax for cloumns
+
 SELECT column_name AS alias_name
 FROM table_name
 ````
+Example:
+If we have a table called persons table and other table called product_orders.We will give tha table aliases of "p" and "po" respectively.
 
-[sql joins](sql-assets/SQL_Joins.png)
+````
+SELECT clause without aliass
+
+SELECT Product_orders.Order_id, person.FirstName, persons.LastName
+FROM Persons,
+Product_orders
+WHERE Person.LastName='Hansen' AND Persons.First_name='Ola'
+
+SELECT clause with aliases
+
+SELECT po.Order_id,p.First_name,p.LastName
+FROM Persons AS p,
+Product_order AS po
+WHERE p.LastName='Hansen' AND p.FirstName= 'Ola'
+````
+
+-------
+### SQL Joins
+SQL joins are used to query data from two or more tables, based on a relationship between certain columns in tables.
+##### SQL JOIN
+The JOIN keyword is used in an SQL statement to query data from two or more tables, based on a relationship between certain column in these tables.
+Tables in a database are often related to each other with keys.
+A primary key is a column (or a combinations of columns) with a unique value for each row. Each primary key value must be unique within the table. The purpose is to bind data together across tables without repeating all the data in every table.
+
+
+![sql joins](sql-assets/SQL_Joins.png)
+
+the persons table:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+
+the orders table:
+
+|O_id|OrderNo|P_id|
+|---|---|---|
+|1|77895|3|
+|2|44678|3|
+|3|22456|1|
+|4|24562|1|
+|5|34764|15|
+
+The P_id columnn is the primary key in the "persons" table. This means that **no** two rows can have the same P_id. The P_id distinguishes two persons even if they have the same name.
+The O_id column is the priamry key in the orders table and that the p_id column refers to the persons in the persons table without using their names.
+The relationship between the column is the "p_id".
+
+#### Different SQL JOINs
+- JOIN: Retuen rows when there is atleast one match in both tables.
+- LEFT JOIN: Return all rows from the left table , even if there are no matches in the right table.
+- RIGHT JOIN: Return all rows from thr right table, even if there are no matches in the left table.
+- FULL JOIN: Return rows when there is a match in one oft the tables.
+------
+####INNER JOIN/JOIN:
+The INNER JOIN keyword return rows when there is at least one match in the both tables.
+Syntax:
+````
+SELECT column_name(s)
+FROM table_name1
+INNER JOIN table_name2
+ON table_name1.column_name = table_name2.column_name
+````
+
+Example:
+Persons table:
+
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+
+the orders table:
+
+|O_id|OrderNo|P_id|
+|---|---|---|
+|1|77895|3|
+|2|44678|3|
+|3|22456|1|
+|4|24562|1|
+|5|34764|15|
+````
+SELECT Persons.LastName,Persons.FirstName,Orders.OrderNo
+FROM Persons 
+INNER JOIN orders 
+ON Persons.P_id = Orders.P_id
+ORDERBY Persons.LastName
+````
+Result-Set:
+
+|LastName|FirstNmae|OrderNo|
+|---|---|---|
+|Hansen|Ola|22456|
+|Hansen|Ola|24562|
+|Pettersen|Kari|77895|
+|Pettersen|Kari|44678|
+
+The INNER JOIN /JOIN keyword return rows when there is at least one much in both tables.
+If there are rows in "Persons" that do not have matches in "Orders", those rows will NOT be listed.
+-----
+#### SQL LEFT JOIN/LEFT OUTER JOIN 
+The LEFT JOIN keyword returns all rows from the left table(table_name1), even if there are no matches in the right table(table_name2).
+
+Syntax:
+````
+SELECT column_name(s)
+FROM table_name1
+LEFT JOIN table_name2
+ON table_name1.column_name = table_name2.column_name
+````
+EXAMPLE:
+List the persons and their orders if any ,from the tables of person and orders.
+````
+SELECT Persons.LastName,Persons.FirstName,Orders.OrderNo
+FROM PERSONS
+LEFT JOIN Orders
+ON Persons.P_id = Orders.P_id
+ORDER BY Persons.LastName
+````
+
+Result-Set:
+
+|LastName|FirstName|OrderNo|
+|---|---|---|
+|Hansen|Ola|22456|
+|Hansen|Ola|24562|
+|Pettersen|Kari|77895|
+|Pettersen|Kari|44678|
+|Svendson|Tove||
+--------
+### RIGHT JOIN Keyword
+The RIGHT JOIN keyword return all rows from the right table(table_name2),even if there are no matches in the left table(table_name1).
+
+Syntax:
+````
+SELECT column_name(s)
+FROM table_name1
+RIGHT JOIN table_name2
+ON table_name1.column_name = table_name2.column_name
+````
+result-set:
+|O_id|OrderNo|P_id|
+|---|---|---|
+|1|77895|3|
+|2|44678|3|
+|3|22456|1|
+|4|24562|1|
+|5|34764|15|
+
+Example2:
+list all the orders with containing persons -if any ,from the persons and orders table.
+````
+SELECT Persons.LastNmae,Persons.FirstName,Orders.OrderNo
+FROM Persons
+RIGHT JOIN Orders
+ON Persons.P_id = Orders.OrderNo
+ORDER BY Persons.LastNmae
+````
+Result-Set:
+
+|LastName|FirstName|OrderNo|
+|---|---|---|
+|Hansen|Ola|22456|
+|Hansen|Ola|24562|
+|Pettersen|Kari|77895|
+|Pettersen|Kari|44678|
+|||34764|
+
+Right JOin keyword return all the rows from the right table(Orders),even if there are no matches in the left table(Persons).
+-------
+#### SQL FULL JOIN Keyword
+The FULL JOIN keyword return rows when there is a match in one of the tables.
+Syntax:
+````
+SELECT column_name(s)
+FROM table_name1
+FULL JOIN table_name2
+ON table_name1.column_name = table_name2.column_name
+````
+Example:
+
+Persons table:
+
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+Orders table
+
+|O_id|OrderNo|P_id|
+|---|---|---|
+|1|77895|3|
+|2|44678|3|
+|3|22456|1|
+|4|24562|1|
+|5|34764|15|
+
+Get all the persons and their orders, and all the orders with their persons.
+````
+SELECT Persons.LastName,Person.FirstName,Orders.OrderNo
+FROM Persons
+FULL JOIN Orders
+ON Persons.P_id = Orders.P_id
+ORDER BY Persons.LastName
+````
+Result set:
+
+
+|LastName|FirstName|OrderNo|
+|---|---|---|
+|Hansen|Ola|22456|
+|Hansen|Ola|24562|
+|Pettersen|Kari|77895|
+|Pettersen|Kari|44678|
+|Svendson|Tove||
+|||34764|
+
+The FULL JOIN keyword returns all the rows from the left table(Persons) and all the rows fromthe right table(Orders). If there are rows in "Persons" that do not have matches in "Orders", or if there are rows in "Orders" that do not have matches in "Persons", those rows will be listed as well.
 
