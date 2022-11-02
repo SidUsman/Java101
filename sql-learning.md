@@ -645,7 +645,7 @@ NOTE:-
 The BETWEEN operator is treated differently in different databases.
 In some databases' person with the last_name of "Hansen" or "Pettersen" will not be listed because the BETWEEN operator only selects fields that are between and excluding the test values.
 In other databases' person with the LastName of "Hansen" or "Pettersen" will be listed because the BETWEEN operator selects fields that are between and including the test values.
-In some databases person with the LastName of "Hansen" will be listed but "Pettersen" will not be listed like example above because the BETWEEN operator selects fields between the test values, including the first value and excluding the last test value.
+In some databases' person with the LastName of "Hansen" will be listed but "Pettersen" will not be listed like example above because the BETWEEN operator selects fields between the test values, including the first value and excluding the last test value.
 Therefore, it is better to check how a database treats the BETWEEN operator.
 
 Example:
@@ -663,7 +663,7 @@ result-set:
 
 -------
 ### SQL Alias
-With SQL an alias name can be given to a table or a column. This can be a good thing to do if you have a very long or complex table name or column names. An alias name could be anything but usually it is short.
+With SQL an alias name can be given to a table or a column. This can be a good thing to do if you have a very long or complex table name or column names. An alias name could be anything, but usually it is short.
 ````
 Aias syntax for tables
 
@@ -906,3 +906,125 @@ Result set:
 
 The FULL JOIN keyword returns all the rows from the left table(Persons) and all the rows fromthe right table(Orders). If there are rows in "Persons" that do not have matches in "Orders", or if there are rows in "Orders" that do not have matches in "Persons", those rows will be listed as well.
 
+--------
+### SQL UNION Operator
+The SQL UNION operator combines two or more SELECT statement.
+The UNION operator is used to combine the result-set of two or more SELECT statement.
+But each SELECT satement within the UNION must have the same number of columns.
+The column must also have similar data types. Also, the columns in each SELECT statement must be in the same order.
+````
+SELECT column_name(s) FROM table_name1
+UNION
+SELECT column_name(s) FROM table_name2
+````
+The UNION operator selects only distint values by default. To alow duplicate values,
+use UNION ALL.
+#### SQL UNION ALL 
+````
+SELECT column_name(s) FROM table_name1
+UNION ALL
+SELECT column_name(s) FROM table_name2
+````
+The column names in the result-set of a UNION are always equal to the column names in the first SELECT statement in the UNION.
+EXAMPLES :
+Table : employees_norway
+
+|e_id|e-name|
+|---|---|
+|1|hansen,ola|
+|2|svendson,tove|
+|3|svendson,stephen|
+|4|pettersen,kari|
+
+table : employees_USA
+
+|e_id|e_name|
+|---|---|
+|1|turner,sally|
+|2|kent,clark|
+|3|svendson,stephen|
+|4|scott,stephen|
+
+Example: List all the different employees in Norway and USA.
+````
+SELECT e_name FROM employees_Norway
+UNION
+SELECT e_name FROM employees_USA
+````
+Result-set:
+
+|e-name|
+|---|
+|hansen,ola|
+|svendson,tove|
+|svendson,stephen|
+|pettersen,kari|
+|turner,sally|
+|kent,clark|
+|scott,stephen|
+
+This command can not be used to list all employees in Norway and USA. In the example above we have two employees with equal names and only one of them will be listed. The UNION command select only distinct values.
+
+Example : List all employees in Norway and USA.
+````
+SELECT e_name FROM employees_USA
+UNION ALL
+SELECT e_name FROM employees_USA
+````
+result-set:
+
+|e-name|
+|---|
+|hansen,ola|
+|svendson,tove|
+|svendson,stephen|
+|pettersen,kari|
+|turner,sally|
+|kent,clark|
+|svendson,stephen|
+|scott,stephen|
+
+------
+### SQL SELECT INTO Statement 
+The SELECT INTO statement can be used to create backup copies of tables.
+The SELECT INTO statement selects data from one table and inserts it into a different table.
+The SELECT INTO statement is most often used to create backup copies of tables.
+````
+SELECT *
+INTO new_table_name[IN externaldatabase]
+FROM old_tablename
+
+or we can select only the columns we want into the new table.
+
+SELECT column_name(s)
+INTO new_table_name[IN externaldatabase]
+FROM old_tablename
+````
+Example:
+Make a backup copy - make an exact copy of data in "Persons" table.
+````
+SELECT *
+INTO persons_backup
+FROM persons
+
+by using IN clause to copy the table into another database:
+
+SELECT *
+INTO persons_backup IN 'backup.mdb'
+FROM persons
+
+Can copy only a few fields into the new table:
+
+SELECT LastName,FirstName 
+INTO persons_backup
+FROM persons
+````
+#### SQL SELECT INTO with a WHERE clause
+This SQL statement creates a persons_backup table wih only the person who lives in the city "sandnes"
+````
+Select LastNmae ,FirstName 
+INTO persons_backup
+FROM persons
+WHERE City= 'Sandnes'
+````
+SQL SELECT INTO - Joined Tables
