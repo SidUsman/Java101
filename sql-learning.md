@@ -726,6 +726,7 @@ the orders table:
 |5|34764|15|
 
 The P_id columnn is the primary key in the "persons" table. This means that **no** two rows can have the same P_id. The P_id distinguishes two persons even if they have the same name.
+
 The O_id column is the priamry key in the orders table and that the p_id column refers to the persons in the persons table without using their names.
 The relationship between the column is the "p_id".
 
@@ -735,7 +736,7 @@ The relationship between the column is the "p_id".
 - RIGHT JOIN: Return all rows from thr right table, even if there are no matches in the left table.
 - FULL JOIN: Return rows when there is a match in one oft the tables.
 ------
-####INNER JOIN/JOIN:
+#### INNER JOIN/JOIN:
 The INNER JOIN keyword return rows when there is at least one match in the both tables.
 Syntax:
 ````
@@ -784,6 +785,7 @@ Result-Set:
 The INNER JOIN /JOIN keyword return rows when there is at least one much in both tables.
 If there are rows in "Persons" that do not have matches in "Orders", those rows will NOT be listed.
 -----
+
 #### SQL LEFT JOIN/LEFT OUTER JOIN 
 The LEFT JOIN keyword returns all rows from the left table(table_name1), even if there are no matches in the right table(table_name2).
 
@@ -813,6 +815,7 @@ Result-Set:
 |Pettersen|Kari|77895|
 |Pettersen|Kari|44678|
 |Svendson|Tove||
+
 --------
 ### RIGHT JOIN Keyword
 The RIGHT JOIN keyword return all rows from the right table(table_name2),even if there are no matches in the left table(table_name1).
@@ -825,6 +828,7 @@ RIGHT JOIN table_name2
 ON table_name1.column_name = table_name2.column_name
 ````
 result-set:
+
 |O_id|OrderNo|P_id|
 |---|---|---|
 |1|77895|3|
@@ -853,6 +857,7 @@ Result-Set:
 |||34764|
 
 Right JOin keyword return all the rows from the right table(Orders),even if there are no matches in the left table(Persons).
+
 -------
 #### SQL FULL JOIN Keyword
 The FULL JOIN keyword return rows when there is a match in one of the tables.
@@ -910,7 +915,7 @@ The FULL JOIN keyword returns all the rows from the left table(Persons) and all 
 ### SQL UNION Operator
 The SQL UNION operator combines two or more SELECT statement.
 The UNION operator is used to combine the result-set of two or more SELECT statement.
-But each SELECT satement within the UNION must have the same number of columns.
+But each SELECT statement within the UNION must have the same number of columns.
 The column must also have similar data types. Also, the columns in each SELECT statement must be in the same order.
 ````
 SELECT column_name(s) FROM table_name1
@@ -986,9 +991,9 @@ result-set:
 
 ------
 ### SQL SELECT INTO Statement 
-The SELECT INTO statement can be used to create backup copies of tables.
-The SELECT INTO statement selects data from one table and inserts it into a different table.
-The SELECT INTO statement is most often used to create backup copies of tables.
+- The SELECT INTO statement can be used to create backup copies of tables.
+- The SELECT INTO statement selects data from one table and inserts it into a different table.
+- The SELECT INTO statement is most often used to create backup copies of tables.
 ````
 SELECT *
 INTO new_table_name[IN externaldatabase]
