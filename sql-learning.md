@@ -816,7 +816,7 @@ Result-Set:
 |Pettersen|Kari|44678|
 |Svendson|Tove||
 
---------
+-------------------------------------------
 ### RIGHT JOIN Keyword
 The RIGHT JOIN keyword return all rows from the right table(table_name2),even if there are no matches in the left table(table_name1).
 
@@ -858,7 +858,7 @@ Result-Set:
 
 Right JOin keyword return all the rows from the right table(Orders),even if there are no matches in the left table(Persons).
 
--------
+--------------------------------------
 #### SQL FULL JOIN Keyword
 The FULL JOIN keyword return rows when there is a match in one of the tables.
 Syntax:
@@ -911,7 +911,7 @@ Result set:
 
 The FULL JOIN keyword returns all the rows from the left table(Persons) and all the rows fromthe right table(Orders). If there are rows in "Persons" that do not have matches in "Orders", or if there are rows in "Orders" that do not have matches in "Persons", those rows will be listed as well.
 
---------
+--------------------------------------
 ### SQL UNION Operator
 The SQL UNION operator combines two or more SELECT statement.
 The UNION operator is used to combine the result-set of two or more SELECT statement.
@@ -989,7 +989,7 @@ result-set:
 |svendson,stephen|
 |scott,stephen|
 
-------
+----------------------------------------
 ### SQL SELECT INTO Statement 
 - The SELECT INTO statement can be used to create backup copies of tables.
 - The SELECT INTO statement selects data from one table and inserts it into a different table.
@@ -1024,6 +1024,7 @@ SELECT LastName,FirstName
 INTO persons_backup
 FROM persons
 ````
+-------------------------------------------
 #### SQL SELECT INTO with a WHERE clause
 This SQL statement creates a persons_backup table wih only the person who lives in the city "sandnes"
 ````
@@ -1032,4 +1033,455 @@ INTO persons_backup
 FROM persons
 WHERE City= 'Sandnes'
 ````
-SQL SELECT INTO - Joined Tables
+--------------------------------------------
+
+#### SQL SELECT INTO - Joined Tables
+Selecting data from more than one table is also possible.
+Example : create a "persons_order_backup" table from the two tables "persons "
+and "orders".
+````
+SELECT Persons.Last Name,Orders.OrderNo
+INTO persons_order_backup
+FROM Persons
+INNER JOIN Orders
+ON Persons.P_id = Orders.P_id
+````
+------------------
+### SQL CREATE DATABASE Statement
+CREATE DATABASE Statement is used to create a database 
+Syntax:
+````
+CREATE DATABASE database_name
+````
+Example:
+Create a database called "my_db"
+````
+CREATE DATABASE my_db
+````
+-------------------------------------
+#### CREATE TABLE Statement
+The CREATE TABLE statement is used to create a table in a database.
+Syntax:
+````
+CREATE TABLE table_name
+(
+column_name1 dat_type,
+column_name2 dat_type,
+column_name3 dat_type,
+column_name4 dat_type,
+....
+)
+````
+The data type specifies what type of data the column can hold.
+
+Example:
+Create a table called persons that contains five columns:
+p_id ,last_name, first_name, address, city
+````
+CREATE TABLE persons
+(
+p_id int,
+last_name varchar(225),
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+)
+````
+NOTE : p_id is int/integer type and rest of the columns are variable character with a max length of 225 characters.
+
+Result-set = persons table 
+
+|p_id|last_name|first_name|address|city|
+|---|---|---|---|---|
+||||||
+
+-----------------------------
+### SQL Constraints
+Constraints are used to limit the type f data that can go into a table.
+
+Constraints can be specified when a table is created(with CREATE TABLE) or after the table is created(with ALTER TABLE).
+
+CONSTRAINTS:
+- NOT NULL
+- UNIQUE
+- PRIMARY KEY
+- FOREIGN KEY
+- CHECK
+- DEFAULT 
+
+---------------------
+
+#### SQL NOT NULL Constraint:
+The NOT NULL constraint enforces a column to NOT accept NULL value.
+
+The NOT NULL constraint enforces a field to always contain a value. This means you can insert a new record or update a record without adding a value to this field.
+
+Example:
+This example enforces the p_id column and the last_name column to not accept NULL value:
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+)
+````
+
+---------------------
+
+#### SQL UNIQUE Constraint
+The **UNIQUE** constraint uniquely identifies each record in a database table.
+
+The **UNIQUE** and **PRIMARY KEY** constraints both provide a guarantee for uniqueness for a column or set of columns.
+
+A **PRIMARY KEY** constraints automatically has a **UNIQUE** constraint defined on it.
+
+You can have many unique constraints per table but **only one PRIMARY KEY** constraint per table.
+
+
+EXAMPLE:
+**SQL UNIQUE Constraint on CREATE TABLE**
+
+**MySQL:**
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+UNIQUE(p_id)
+)
+````
+
+**SQL Server/Oracle/MS Access:**
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL UNIQUE,
+last_name varchar(225) NOT NULL,
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+)
+````
+
+**MySQL / SQL Server / Oracle / MS Access:**
+To allow naming if a UNIQUE constraint and for defining a UNIQUE constraint on multiple columns.
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+CONSTRAINT uc_personID UNIQUE(p_id,last_name)
+)
+````
+
+---------------------
+#### SQL UNIQUE Constraint on ALTER TABLE
+To create a UNIQUE constraint on the "p_id" column when the table is already created.
+
+**MySQL / SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE persons
+ADD UNIQUE(p_id)
+````
+**MySQL / SQL Server / Oracle / MS Access:**
+To allow naming if a UNIQUE constraint and for defining a UNIQUE constraint on multiple columns.
+
+````
+ALTER TABLE persons
+ADD CONSTRAINT uc_personID UNIQUE (p_id,last_name)
+````
+
+-----------------------
+### To DROP a UNIQUE Constraint
+**My SQL**
+````
+ALTER TABLE persons
+DROP INDEX uc_personID
+````
+
+**SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE persons
+DROP CONSTRAINT uc_personID
+
+````
+------------------
+### SQL PRIMARY KEY Constraint
+The PRIMARY KEY constraint uniquely identifies  each record in a database table.
+
+Primary keys must contain unique values.
+
+A primary key column can not contain NULL values.
+
+Each table should have a primary key and each table can have only ONE primary key .
+
+-----------
+#### SQL PRIMARY KEY Constraint on CREATE TABLE
+The following SQL creates a  PRIMARY KEY on the "p_id" column when the "persons" table is created.
+
+**My SQL**
+
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+PRIMARY KEY (p_id)
+)
+````
+
+**SQL Server / Oracle / MS Access:**
+
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL PRIMARY KEY,
+last_name varchar(225) NOT NULL,
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+)
+````
+**MySQL / SQL Server / Oracle / MS Access:**
+To allow naming if a PRIMARY KEY constraint and for defining a PRIMARY KEY constraint on multiple columns.
+
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225)
+address varchar(225)
+city varchar(225)
+CONSTRAINT pk_personID PRIMARY KEY (p_id,last_name)
+)
+````
+
+#### SQL PRIMARY KEY Constraint on ALTER TABLE
+
+To create a PRIMARY KEY constraint on the "p_id" column when the table is already created.
+**MySQL / SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE persons
+ADD PRIMARY KEY (p_id)
+````
+**MySQL / SQL Server / Oracle / MS Access:**
+To create a PRIMARY KEY constraint and for defining a PRIMARY KEY constraint on multiple columns.
+
+````
+ALTER TABLE persons
+ADD CONSTRAINT pk_personID PRIMARY KEY (p_id,last_name)
+````
+NOTE: If you use the ALTER TABLE statement to add a primary key, the primary key columns must already have been declared to not contain NULL values ,when the table was first created.
+
+---------------------
+#### To DROP a PRIMARY KEY Constraint 
+To drop a PRIMARY KEY constraint :
+````
+ALTER TABLE persons
+DROP PRIMARY KEY
+````
+
+**SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE persons
+DROP CONSTARINT pk_personID
+````
+
+------------------
+### SQL FOREIGN KEY Constraint
+A FOREIGN KEY in one table points to a PRIMARY KEY in another table.
+
+Example:
+
+**Persons table**
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+**Orders table**
+
+|O_id|OrderNo|P_id|
+|---|---|---|
+|1|77895|3|
+|2|44678|3|
+|3|22456|2|
+|4|24562|1|
+
+- The "P_id" column in the "orders" table points to the "P_id" column in the "Persons" table.
+- The "P_id" column in the "Persons" table is the PRIMARY KEY in the "Persons" table.
+- The "P_id" column in the "Orders" table is a FOREIGN KEY in the "ORDERS" table.
+- The FOREIGN KEY constraint is used to prevent actions that would destroy links between table.
+- The FOREIGN KEY constraint also prevents that invalid data from being inserted into the foreign key column, because it has to be one of the values contained in the table it points to.
+
+#### SQL FOREIGN KEY Constraint on CREATE TABLE
+Example : Create a FOREIGN KEY on the "P_id" column when the "Orders" table is created.
+
+**MySQL**
+````
+CREATE TABLE orders
+(
+O_id int NOT NULL,
+OderNo int NOT NULL,
+P_id int,
+PRIMARY KEY (O_id),
+FORIEIGN KEY (P_id) REFRENCES Persons(P_id)
+)
+````
+**SQL Server / Oracle / MS Access:**
+````
+CREATE TABLE orders
+(
+O_id int NOT NULL PRIMARY KEY,
+OderNo int NOT NULL,
+P_id int FORIEIGN KEY (P_id) REFRENCES Persons(P_id),
+
+)
+````
+**MySQL / SQL Server / Oracle / MS Access:**
+To allow naming of a FOREIGN KEY constraint and for defining a FOREIGN KEY constraint on multiple columns.
+````
+CREATE TABLE orders
+(
+O_id int NOT NULL,
+OderNo int NOT NULL,
+P_id int,
+PRIMARY KEY (O_id),
+CONTRAINT fk_PerOrders FORIEIGN KEY (P_id),
+REFRENCES Persons(P_id)
+)
+````
+-------------
+#### SQL FOREIGN KEY Constraint on ALTER TABLE
+Example : Create a FOREIGN KEY constraint on the "P_id" column when the "Orders" table is already created.
+
+**MySQL / SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE Orders
+ADD FOREIGN KEY(P_id)
+REFERENCES Persons(P_id)
+````
+
+**MySQL / SQL Server / Oracle / MS Access:**
+To allow naming of a FOREIGN KEY constraint and for defining a FOREIGN KEY constraint on multiple columns.
+
+````
+ALTER TABLE Orders
+ADD CONSRAINT fk_PerOrder,
+FOREIGN KEY(P_id),
+REFERENCES Persons(P_id)
+````
+---------------
+
+#### To DROP a FOREIGN KEY Constraint
+To drop a FOREIGN KEY constraint :
+**MYSQL**
+````
+ALTER TABLE Orders
+DROP  FOREIGN KEY fk_PerOrder
+````
+
+**SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE persons
+DROP CONSTARINT fk_PerOrder
+````
+-----------------
+
+### SQL CHECK Constraint
+The CHECK constraint is used to limit the value range that can be placed in a column.
+
+If you define a CHECK constraint on a single column it allows only certain values for this column.
+
+If you define a CHECK constraint on a table it can limit the value in certain columns based on values in other columns in the row.
+
+----------------
+#### SQL CHECK Constraint on CREATE TABLE
+The following SQL creates a CHECK constraint on the "P_id" column when the "persons" table is created. The CHECK constraint specifies that the column "P_id" must only include integers greater than 0.
+
+**MySQL**
+CREATE TABLE Persons
+(
+P_id into NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225),
+address varchar(225),
+city varchar(225),
+CHECK (P_id>0)
+)
+
+**SQL Server / Oracle / MS Access:**
+CREATE TABLE Persons
+(
+P_id int NOT NULL CHECK(P_id>0),
+last_name varchar(225) NOT NULL,
+first_name varchar(225),
+address varchar(225),
+city varchar(225) 
+)
+
+To allow naming of a CHECK constraint and for defining a CHECK constraint on multiple columns.
+
+**MySQL / SQL Server / Oracle / MS Access:**
+To allow naming of a CHECK constraint and for defining a CHECK constraint on multiple columns.
+
+CREATE TABLE Persons
+(
+P_id int NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225),
+address varchar(225),
+city varchar(225)
+CONSTRAINT chk_person CHECK(P_id>0 AND city = 'Sandnes')
+)
+
+-----------------
+#### SQL CHECK Constraint on ALTER TABLE
+To create a CHECK constraint on the "P_id" column when the table is already created.
+
+**MySQL / SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE Persons
+ADD CHECK (P_id>0)
+````
+--------------------
+**MySQL / SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE Persons
+ADD CONSTRAINT chk_Person CHECK (P_id>0 AND city = 'Sandnes')
+
+````
+----------------
+#### To DROP a CHECK Constrait
+
+To drop a CHECK constraint
+**SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE Persons
+DROP CONSTRAINT chk_person
+````
+-----------------------
+### SQL DEFAULT Constraint 
+
+
+
+
+
+
+
+
