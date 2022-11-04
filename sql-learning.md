@@ -1467,7 +1467,7 @@ ADD CONSTRAINT chk_Person CHECK (P_id>0 AND city = 'Sandnes')
 
 ````
 ----------------
-#### To DROP a CHECK Constrait
+#### To DROP a CHECK Constraint
 
 To drop a CHECK constraint
 **SQL Server / Oracle / MS Access:**
