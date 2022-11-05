@@ -63,7 +63,7 @@ For example the following SQL Statement will select all the records in the "Pers
 ````
 SELECT * FROM Persons
 ````
-Note: (SQL is not Case Senstive)
+Note: (SQL is not Case Sensitive)
 
 #### Semicolon ( ; ) after SQL Statement 
 Some databases require a semicolon at the end of each SQL Statement .
@@ -75,7 +75,7 @@ SQL can be divided into two parts:
 - DML = The Data Manipulation Language 
 - DDL = The Data Definition Language 
 
-1. The query and update commands from the **DML** part of SQL:
+1. The query and update commands from the **DML** part of **SQL**:
 
  - **SELECT** - extract data from databases 
  - **UPDATE** - updates data in a database
@@ -96,14 +96,15 @@ SQL can be divided into two parts:
 
 The SQL SELECT Statement is used to select data from a database.
 The result is stored in a result table, called the result-set.
-##### SQL  SELECT Syntax
+#### SQL  SELECT Syntax:
+````
 SELECT column_name(s)
 FROM table_name
-
+````
 and 
-
+````
 SELECT * FROM table_name (select all from table_name)
-
+````
 EXAMPLE: the "Persons" table
 
 |P_Id  | LastName  |FirstName   | Address  | City |
@@ -138,9 +139,9 @@ result-set will be as :
 ----
 #### SQL SELECT DISTINCT Example
 using the "Persons" table 
-
+````
 SELECT DISTINCT City FROM Persons
-
+````
 Result-set  will be like:
 
 
@@ -174,7 +175,7 @@ result-set :
 SQL use single quotes around text values , most database systems will also accept double quotes .
 Although Numeric values should not be enclosed in quotes.
 
-**Operators Allowed in the WHERE Clause**
+### Operators Allowed in the WHERE Clause
 
 |Operators | Description |
 |---|---|
@@ -196,7 +197,7 @@ The OR operator displays a record if either the first or the second condition is
 
 using the "Persons" table
 
-AND Example :
+**AND Example :**
 ````
 SELECT * FROM Persons
 WHERE FirstName = 'Tove'
@@ -208,7 +209,7 @@ The result-set will be like:
 |---|---|---|---|---|
 |2 |Svendson |Tove | Borgvn 23|Sandnes|
 
-OR Example:
+**OR Example:**
 ````
 SELECT * FROM Persons 
 WHERE FirstName = 'Tove'
@@ -270,7 +271,7 @@ ORDER BY LastName DESC
 | 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
 
 ----
-###The INSERT INTO Statement
+### The INSERT INTO Statement
 
 The INSERT INTO Statement is used to insert a new row in a table.
 
@@ -1783,7 +1784,7 @@ CACHE 10
 ````
 The code above creates a sequence object called seq_person, that starts with 1 and will increment by 1. It will also cache up to 10 values for performance. The cache option specifies how many sequence values will be stores in memory for faster access.
 
-To insert a new record into the "person" table, we will have to use the nextval function, this function retrieves the next value from seq_person sequence:
+To insert a new record into the "person" table, we will have to use the "nextval function", this function retrieves the next value from seq_person sequence:
 ````
 INSERT INTO persons(p_id,first_name,last_name)
 VALUES(seq_person.nextval,'Lars','Monsen')
