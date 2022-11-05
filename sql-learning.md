@@ -1111,7 +1111,9 @@ CONSTRAINTS:
 
 ---------------------
 
-#### SQL NOT NULL Constraint:
+### SQL NOT NULL Constraint:
+
+----------------------------
 The NOT NULL constraint enforces a column to NOT accept NULL value.
 
 The NOT NULL constraint enforces a field to always contain a value. This means you can insert a new record or update a record without adding a value to this field.
@@ -1131,7 +1133,9 @@ city varchar(225)
 
 ---------------------
 
-#### SQL UNIQUE Constraint
+### SQL UNIQUE Constraint
+
+----------------------------
 The **UNIQUE** constraint uniquely identifies each record in a database table.
 
 The **UNIQUE** and **PRIMARY KEY** constraints both provide a guarantee for uniqueness for a column or set of columns.
@@ -1216,6 +1220,8 @@ DROP CONSTRAINT uc_personID
 ````
 ------------------
 ### SQL PRIMARY KEY Constraint
+
+--------------------------------
 The PRIMARY KEY constraint uniquely identifies  each record in a database table.
 
 Primary keys must contain unique values.
@@ -1225,7 +1231,7 @@ A primary key column can not contain NULL values.
 Each table should have a primary key and each table can have only ONE primary key .
 
 -----------
-#### SQL PRIMARY KEY Constraint on CREATE TABLE
+### SQL PRIMARY KEY Constraint on CREATE TABLE
 The following SQL creates a  PRIMARY KEY on the "p_id" column when the "persons" table is created.
 
 **My SQL**
@@ -1302,6 +1308,8 @@ DROP CONSTARINT pk_personID
 
 ------------------
 ### SQL FOREIGN KEY Constraint
+
+---------------------------------
 A FOREIGN KEY in one table points to a PRIMARY KEY in another table.
 
 Example:
@@ -1404,6 +1412,8 @@ DROP CONSTARINT fk_PerOrder
 -----------------
 
 ### SQL CHECK Constraint
+
+-----------------------
 The CHECK constraint is used to limit the value range that can be placed in a column.
 
 If you define a CHECK constraint on a single column it allows only certain values for this column.
@@ -1477,6 +1487,462 @@ DROP CONSTRAINT chk_person
 ````
 -----------------------
 ### SQL DEFAULT Constraint 
+
+The DEFAULT constraint is used to insert a default value into a column.
+The default value will be added to all new records, if no other value is specified.
+
+-------------------
+#### SQL DEFAULT Constraint on CREATE TABLE
+The following SQL creates a DEFAULT constraint on the "city" column when the "persons" table is created.
+
+**MySQL / SQL Server / Oracle / MS Access:**
+````
+CREAT TABLE persons
+(
+P_id int NOT NULL,
+last_name varchar(225) NOT NULL,
+first_name varchar(225),
+address varchar(225),
+city varchar(225) DEFAULT 'Sandnes'
+)
+````
+The DEFAULT constraint can also be used to insert system values by using functions like GETDATE() :
+````
+CREATE TABLE Orders
+(O_id int NOT NULL,
+OrderNo int NOT NULL,
+P_id int,
+OrderDate date DEFAULT GETDATE()
+)
+````
+------------------------------
+#### SQL DEFAULT Constraint on ALTER TABLE
+To create a DEFAULT constraint on the "city" column when the table is already created.
+**MySQL:**
+````
+ALTER TABLE persons
+ALTER city SET DEFAULT 'SANDNES'
+````
+---------------
+#### To DROP a DEFAULT Constraint
+To drop a DEFAULT constraint 
+**MySQL:**
+````
+ALTER TABLE persona 
+ALTER city DROP DEFAULT 
+````
+**SQL Server / Oracle / MS Access:**
+````
+ALTER TABLE persons 
+ALTER COLUMN city DROP DEFAULT
+````
+------------------------
+
+### SQL CREATE INDEX Statement 
+The CREATE INDEX statement is used to create indexes in table.
+
+Indexes allow the database application to find data fast, without reading the table.
+
+#### Indexes
+An index can be created in a table to find data more quickly and efficiently.
+
+The user cannot see the indexes, they are just used to speed up searches/queries.
+Updating a table with indexes takes more time than updating a table without because the indexes also need an update. So we should only create indexes on columns and table that will be frequently searched against.
+
+**SQL CREATE INDEX Syntax**
+Create an index on a table. Duplicate values are allowed:
+````
+CREATE INDEX index_name
+ON table_name(column_name)
+````
+**SQL CREATE UNIQUE INDEX Syntax**
+Create a unique index on a table. Duplicate values are allowed:
+
+````
+CREATE UNIQUE INDEX index_name
+ON table_name(column_name)
+````
+The syntax for creating indexes varies amongst different databases.
+
+Example:
+Create an index named "pIndex" on the "last_name" column in the "persons" table:
+````
+CREATE INDEX pIndex
+ON persons(last_name,first_name)
+````
+
+-----------------
+#### SQL DROP INDEX, DROP TABLE & DROP DATABASE
+Indexes, tables and databases can easily be deleted/removed with the DROP statement.
+
+**The DROP INDEX Statement**
+The DROP INDEX statement is used to delete an index in a table.
+**MS Access**
+````
+DROP INDEX index_name ON table_name
+````
+**MS SQL Server**
+````
+DROP INDEX table_name.index_name
+````
+**DB2/Oracle**
+````
+DROP INDEX index_name
+````
+**MySQL**
+````
+ALTER TABLE table_name DROP index_name
+````
+-------------------
+### The DROP TABLE Statement
+The DROP TABLE statement is used to delete a table.
+````
+DROP TABLE table_name
+````
+-----------
+### The DROP DATABASE Statement
+The DROP DATABASE statement is used to delete a database.
+````
+DROP DATABASE database_name
+````
+-----------
+### The TRUNCATE TABLE Statement
+To delete the data inside the table and not the table itself.
+````
+TRUNCATE TABLE table_name
+````
+### SQL ALTER TABLE Statement
+The ALTER TABLE statement is used to add, delete or modify columns in an existing table.
+**To add a column in a table**
+````
+ALTER TABLE table_name
+ADD column_name datatype
+````
+**To delete a column in a table**
+````
+ALTER TABLE table_name
+DROP COLUMN column_name
+````
+**To change the data type of column in a table**
+````
+ALTER TABLE table_name
+DROP COLUMN column_name datatype
+````
+Example:
+Add a column named "date_of_birth" in the "persons" table.
+
+Persons table:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+````
+ALTER TABLE persons
+ADD date_of_birth date
+````
+Date_of_birth column is of type data  and is going to hold date.
+The data type specifies what type of data the column can hold.
+
+Result_set:
+
+|P_id  | LastName  |FirstName   | Address  | City |date_of_birth|
+|---|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes ||
+|2 |Svendson |Tove | Borgvn 23|Sandnes||
+|3 |Pettersen|Kari|Storgt 20|Stavanger||
+
+-------------
+#### Change Data Type Example
+To change the data type of column name "date_of_birth"
+````
+ALTER TABLE persons
+ALTER COLUMN date_of_birth year
+````
+The date_of_birth column is now of type year and is going to hold a year in a two_digit or four_digit format.
+
+--------------------
+#### DROP COLUMN Example
+
+Delete the column named "date_of_birth" in the "persons" table.
+````
+ALTER TABLE persons
+DROP COLUMN date_of_birth
+````
+Result-set:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|Storgt 20|Stavanger|
+
+-----------------------------------------------
+### AUTO INCREMENT a Field
+Auto_increment allows a unique number to be generated when a new record is inserted into a table.
+
+Very often we would like the value of the primary key field to be created automatically every time a record is inserted.
+We would like to create an auto_increment field in a table.
+
+**Syntax:**
+**MySQL**
+````
+CREATE TABLE persons
+(
+p_id int NOT NULL AUTO_INCREMENT,
+last_name varchar(225) NOT NULL,
+first_name varchar(225),
+address varchar(225),
+city varchar(225),
+PRIMARY KEY(p_id)
+)
+````
+MySQL uses the AUTI_INCREMENT keyword to perform an auto_increment feature.
+
+By default, the starting value for AUTO_INCREMENT is 1, and it will increment by 1 for each new record.
+
+**→To let the AUTO_INCREMENT sequence start with another value :**
+````
+ALTER TABLE persons AUTO_INCREMENT = 100
+````
+
+**→To insert a new record into the "persons" table, we will have to specify the value for the "p_id" column, a unique value will be added automatically:**
+````
+INSERT INTO persons(first_name,last_name)
+VALUES('Lars','Monsen')
+````
+
+The SQL statement above would insert a new record into the "persons" table. The "p_id" column would be assigned a unique value. The "first_name" column would be set to "Lars" and the "last_name" column would be set to "Monsen".
+
+#### Syntax for SQL Serer:
+The following SQL statement defines the "P_id" column to be an auto-increment primary key field in the "persons" table:
+````
+CREATE TABLE persons
+(
+p_id int PRIMARY KEY IDENTITY,
+last_name varchar(225) NOT NULL,
+first_name varchar(225),
+address varchar(225),
+city varchar(225)
+)
+````
+The MS SQL server uses the IDENTITY keyword to perform an auto-increment feature.
+
+By default, the starting value for IDENTITY is 1, and it will increment by 1 for each new record.
+
+To specify that "p_id" column should start at value 10 and increment by 5, change the identity to IDENTITY(10,5).
+
+To insert a new record into the "persons" table, we will not have to specify a value for the "p_id" column, a unique value will be added automatically.
+````
+INSERT INTO Person(first_name,last_name)
+VALUES ('Lars','Monsen')
+````
+The SQL statement above would insert a new record into the "persons" table. The "p_id" column would be assigned a unique value. The "first_name" column would be set to "Lars" and the "last_name" column would be set to "Monsen".
+
+------------------------------
+
+### Syntax for Access
+The following SQL statement defines the "p_id" column to be an auto-increment primary key field in the "persons" table.
+````
+CREATE TABLE persons
+(
+p_id int PRIMARY KEY AUTOINCREMENT,
+last_name varchar(225) NOT NULL,
+first_name varchar(225),
+address varchar(225),
+city varchar(225)
+)
+````
+The MS SQL server uses the AUTOINCREMENT keyword to perform an auto-increment feature.
+
+By default, the starting value for AUTOINCREMENT is 1, and it will increment by 1 for each new record.
+
+To specify that "p_id" column should start at value 10 and increment by 5, change the identity to AUTOINCREMENT(10,5).
+
+To insert a new record into the "persons" table, we will not have to specify a value for the "p_id" column, a unique value will be added automatically.
+
+````
+INSERT INTO persons(first_name,last_name)
+VALUES('Lars','Monsen')
+````
+The SQL statement above would insert a new record into the "persons" table. The "p_id" column would be assigned a unique value. The "first_name" column would be set to "Lars" and the "last_name" column would be set to "Monsen".
+
+----------------------
+### Syntax for Oracle
+In Oracle the code is little more tricky.
+
+You will have to create an auto-increment field with the sequence abject, this object generates a number sequence.
+````
+CREATE SEQUENCE  seq_persons
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10
+````
+The code above creates a sequence object called seq_person, that starts with 1 and will increment by 1. It will also cache up to 10 values for performance. The cache option specifies how many sequence values will be stores in memory for faster access.
+
+To insert a new record into the "person" table, we will have to use the nextval function, this function retrieves the next value from seq_person sequence:
+````
+INSERT INTO persons(p_id,first_name,last_name)
+VALUES(seq_person.nextval,'Lars','Monsen')
+````
+The SQL statement above would insert a new record into the "persons" table. The "p_id" column would be assigned the next number from the seq_sequence. The "first_name" column would be set to "Lars" and the "last_name" column would be set to "Monsen".
+
+---------------------------------
+### SQL Views
+
+------------------------------
+A view is a virtual table.
+
+#### SQL CREATE VIEW Statement
+In SQL, a view is a virtual table based on the result-set of an SQL statement.
+
+A view contains rows and columns just like a real table. The fields in a view are fields from one or more real tables in the database.
+
+We can add SQL functions, WHERE & JOIN statements to a view and present the data as if the data were coming from one single table.
+
+**SQL CREATE VIEW Syntax**
+````
+CREATE VIEW view_name AS
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+````
+NOTE: A view is always up_to_date data. The database engine recreates the data using the view's SQL statement every time a user queries a view.
+
+#### SQL CREATE VIEW Examples
+⚙︎ If you have the Northwind database you can see that it has several views installed by default.
+
+The view "Current Product List" lists all active products(products that are not discounted) from the "Products" table. The view is created with the following SQL:
+````
+CREATE VIEW [Current Product List] AS
+SELECT ProductID,ProductName
+FROM Products
+WHERE Discontinued = No
+````
+We can query the view above as follows:
+````
+SELECT * FROM [Current Product List]
+````
+⚙︎ Another view in the Northwind sample database selects every product in the "products" table with a unit price higher than the average unit price:
+````
+CREATE VIEW [Current Above Average Price] AS
+SELECT ProductName,UnitPrice
+FROM Products
+WHERE UnitPrice > (SELECT AVG(UnitPrice)FROM Products)
+````
+We can query the view above as follows:
+````
+SELECT * FROM [Products Above Average Price]
+````
+⚙︎ Another view in the Northwind database calculate the total sale for each category in 1997. Note that this view selects its data from another view called "Product Sales for 1997":
+````
+CREATE VIEW [ategory Sales For 1997] AS
+SELECT DISTINT CategoryName,Sum(productSales) AS CategorySales
+FROM [Product Sales for 1997]
+GROUP BY CategoryName
+````
+We can query the view above as follows:
+````
+SELECT * FROM [Category Sales For 1997]
+````
+We can also add a condition to the query. Now we want to see the total sales only for the category "Beverages":
+````
+SELECT * FROM [Category SAles For 1997] 
+WHERE CategoryName = 'Beverages'
+````
+
+------------
+#### SQL Updating a view
+You can update a view by using the following syntax:
+**SQL CREATE OR REPLACE VIEW Syntax**
+````
+CREATE OR REPLACE VIEW view_name AS
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+````
+Now we want to add the "Category" column to the "Current Product List" view. We will update the view with the following SQL:
+````
+CREATE VIEW [Current Product List] AS
+SELECT ProductID,ProductName, Category
+FROM Products
+WHERE Discontinued = No
+````
+--------------------
+### SQL Dropping a VIEW
+
+------------------------------------
+You can delect a view with the DROP VIEW command.
+
+##### SQL DROP VIEW Syntax 
+````
+DROP VIEW view_name
+````
+------------------------------------
+### SQL Date Functions
+
+------------------------------------
+#### SQL Dates
+The most difficult part when working with dates is to be sure that the format of the date you are trying to insert matches the frmat of thr date column in the database.
+
+As long as data contains only the date portion ,queries will work as expected. However, if a time portion is involved it gets compicated.
+
+------------
+#### MySQL Date Functions
+
+
+
+|Function | Description |
+|---|---|
+|NOW() |Returns the current date and time|
+|CURDATE()|Returns the current date|
+|CURTIME()|Returns the current time|
+|DATE()|Extracts the date part of a date or date/time expression|
+|EXTRACT()|Returns a single part of a date/time|
+|DATE ADD()|Adda a specified time interval to a date|
+|DATE SUB()|Adds a specified time interval to a date|
+|DATEDIFF()|Returns the number of days between two dates|
+|DATE FORMAT()|Displays date/time data in different formats|
+
+-----------------------------
+### SQL Server Date Functions
+
+|Function | Description |
+|---|---|
+|GETDATE()|Returns the current date and time|
+|DATEPART()|Returns a single part of a date/time|
+|DATEADD()|Add or subtracts a specified time interval from a date|
+|DATEIFF()|Returns the time between two dates |
+|CONVERT()|Displays date/time data in different formats|
+
+------------------------------------------
+#### SQL Date Data Types
+**MySQL:**
+- DATE :- Format   **YYYY-MM-DD**
+- DATETIME :- Format   **YYYY-MM-DD HH:MM:SS**
+- TIMESTAMP :- Format  **YYYY-MM-DD HH:MM:SS**
+- YEAR :- Format **YYYY** or **yy**
+
+**SQL Server:**
+- DATE :- Format   **YYYY-MM-DD**
+- DATETIME :- Format   **YYYY-MM-DD HH:MM:SS**
+- SMALLDATETIME :- Format  **YYYY-MM-DD HH:MM:SS**
+- TIMESTAMP :- Format **a unique number**
+
+💡 NOTE : The date types are chosen for a column when you create a new table in your database.
+
+-------------------------
+#### SQL Working with Dates
+
+
+
+
+
+
+
 
 
 
