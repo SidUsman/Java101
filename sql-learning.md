@@ -190,7 +190,8 @@ Although Numeric values should not be enclosed in quotes.
 |LIKE|Search for a pattern|
 |IN|If you know the exact value you want to return for at least one of the columns
 
-#### SQL AND & OR Operators 
+----------------------------
+### SQL AND & OR Operators 
 The AND & OR operators are used to filter records based on more than one conditions.
 The AND operator displays a record if both the first condition and the second condition is true.
 The OR operator displays a record if either the first or the second condition is true.
@@ -222,7 +223,7 @@ result-set will look like this:
 | 1 |Hansen  |Ola |Timoteivn 10|Sandnes |
 |2 |Svendson |Tove | Borgvn 23|Sandnes|
 
-
+----------------------------
 ### The ORDER BY Keyword
 The ORDER BY Keyword is used to sort the result-set by a specified column.
 The ORDER BY keyword sort the records in ascending order by default. To sort in descending order ,DESC keyword is used.
@@ -785,7 +786,8 @@ Result-Set:
 
 The INNER JOIN /JOIN keyword return rows when there is at least one much in both tables.
 If there are rows in "Persons" that do not have matches in "Orders", those rows will NOT be listed.
------
+
+-----------------------
 
 #### SQL LEFT JOIN/LEFT OUTER JOIN 
 The LEFT JOIN keyword returns all rows from the left table(table_name1), even if there are no matches in the right table(table_name2).
@@ -857,7 +859,7 @@ Result-Set:
 |Pettersen|Kari|44678|
 |||34764|
 
-Right JOin keyword return all the rows from the right table(Orders),even if there are no matches in the left table(Persons).
+Right JOIN keyword return all the rows from the right table(Orders),even if there are no matches in the left table(Persons).
 
 --------------------------------------
 #### SQL FULL JOIN Keyword
@@ -880,7 +882,7 @@ Persons table:
 |2 |Svendson |Tove | Borgvn 23|Sandnes|
 |3 |Pettersen|Kari|Storgt 20|Stavanger|
 
-Orders table
+Orders table:
 
 |O_id|OrderNo|P_id|
 |---|---|---|
@@ -1060,7 +1062,7 @@ Create a database called "my_db"
 CREATE DATABASE my_db
 ````
 -------------------------------------
-#### CREATE TABLE Statement
+### CREATE TABLE Statement
 The CREATE TABLE statement is used to create a table in a database.
 Syntax:
 ````
@@ -1189,7 +1191,7 @@ CONSTRAINT uc_personID UNIQUE(p_id,last_name)
 ````
 
 ---------------------
-#### SQL UNIQUE Constraint on ALTER TABLE
+### SQL UNIQUE Constraint on ALTER TABLE:
 To create a UNIQUE constraint on the "p_id" column when the table is already created.
 
 **MySQL / SQL Server / Oracle / MS Access:**
@@ -1279,6 +1281,8 @@ CONSTRAINT pk_personID PRIMARY KEY (p_id,last_name)
 #### SQL PRIMARY KEY Constraint on ALTER TABLE
 
 To create a PRIMARY KEY constraint on the "p_id" column when the table is already created.
+
+
 **MySQL / SQL Server / Oracle / MS Access:**
 ````
 ALTER TABLE persons
@@ -1426,6 +1430,7 @@ If you define a CHECK constraint on a table it can limit the value in certain co
 The following SQL creates a CHECK constraint on the "P_id" column when the "persons" table is created. The CHECK constraint specifies that the column "P_id" must only include integers greater than 0.
 
 **MySQL**
+````
 CREATE TABLE Persons
 (
 P_id into NOT NULL,
@@ -1435,8 +1440,9 @@ address varchar(225),
 city varchar(225),
 CHECK (P_id>0)
 )
-
+````
 **SQL Server / Oracle / MS Access:**
+````
 CREATE TABLE Persons
 (
 P_id int NOT NULL CHECK(P_id>0),
@@ -1445,12 +1451,13 @@ first_name varchar(225),
 address varchar(225),
 city varchar(225) 
 )
+````
 
 To allow naming of a CHECK constraint and for defining a CHECK constraint on multiple columns.
 
 **MySQL / SQL Server / Oracle / MS Access:**
 To allow naming of a CHECK constraint and for defining a CHECK constraint on multiple columns.
-
+````
 CREATE TABLE Persons
 (
 P_id int NOT NULL,
@@ -1460,7 +1467,7 @@ address varchar(225),
 city varchar(225)
 CONSTRAINT chk_person CHECK(P_id>0 AND city = 'Sandnes')
 )
-
+````
 -----------------
 #### SQL CHECK Constraint on ALTER TABLE
 To create a CHECK constraint on the "P_id" column when the table is already created.
