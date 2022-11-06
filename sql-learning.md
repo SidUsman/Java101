@@ -2062,8 +2062,8 @@ FROM Products
 In this example if any of the "UnitsOnOrder" values are NULL, the result will be NULL.
 
 
-- **Microsoft's ISNULL()**** function is used to specfiy how we want to treat NULL values.
-- The NVL( ), IFNULL() and COALESCS() functions can also be used to achive the same result .
+- **Microsoft's ISNULL()**** function is used to specify how we want to treat NULL values.
+- The NVL( ), IFNULL() and COALESCS() functions can also be used to achieve the same result .
 
 In thid case we want NULL values to be zero.
 
@@ -2086,7 +2086,7 @@ FROM Products
 
 MySQL does have an ISNULL() function. However, it works a little different from Microsoft's ISNULL() function.
 
-In MySQL we can use the IFNULL() function:
+In MySQL, we can use the IFNULL() function:
 ````
 SELECT ProductName,UnitPrice*(UnitInStock + IFNULL(UnitsOnOrder,0))
 FROM Products
@@ -2106,7 +2106,7 @@ Data types and ranges for Microsoft Access, MySQL and SQL Server.
 
 ### Microsoft Access Data Types:
 
-|Data types|Descrition |Storage |
+|Data types|Description |Storage |
 |---|---|---|
 |Text |Use for text or combinations of text and numbers. 225 character maximum||
 |Memo|Memo is used for large amounts of text. Stores up to 65,536 characters.Note:You cannot sort a memo field, however they are searchable.||
@@ -2115,10 +2115,10 @@ Data types and ranges for Microsoft Access, MySQL and SQL Server.
 |Long|Allows whole numbers between -2,147,483,648 and 2,147,483,648 |4 bytes|
 |Single|Single precision floating-point. will handle most decimals |4 bytes |
 |Double|Double precision floating-point. Will handle most decimals |8 bytes |
-|Currency |Use for currency. Holds up to 15 digits of whole dollars, plus 4 decimal places. **Tip:**You can choose which country's currency to use |8 bytes |
+|Currency |Use for currency. Holds up to 15 digits of whole dollars, plus 4 decimal places. **Tip:** You can choose which country's currency to use |8 bytes |
 |AutoNumber |AutoNumber fields automatically give each record its own number, usually starting at 1 |4 bytes |
 |Date/Time |Use for dates and times |8bytes |
-|Yes/No|A logic fields can be displayed as Yes/No, True/False or On/Off. In code use the constants True and False (equivqlent to- 1 and 0).**NOTE:**Null values are not allowed in Yes/No fields |1 bit |
+|Yes/No|A logic fields can be displayed as Yes/No, True/False or On/Off. In code use the constants True and False (equivalent to- 1 and 0).**NOTE:**Null values are not allowed in Yes/No fields |1 bit |
 |Ole Object|Can store pictures audio, video or other BLOBs(Binary large objects) |up to 1GB|
 |Hyperlink|Contain links to other files, including web pages |  |
 |Lookup Wizard|Let you type a list of options which can then be chosen from a drop-down list |4 bytes |
