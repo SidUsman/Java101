@@ -1945,8 +1945,187 @@ As long as data contains only the date portion ,queries will work as expected. H
 -------------------------
 #### SQL Working with Dates
 
+You can compare two dates easily if there is no time component involved.
+
+Example:
+
+Orders table:
+
+|OrderId|ProductName|OrderDate|
+|---|---|---|
+|1|Geitost|2008-11-11|
+|2|Camembert|2008-11-09|
+|3|Mozzarella di Giovanni|2008-11-11|
+|4|Mascarpone|2008-10-29|
+
+Select thr records eith an OrderDate of 2008-11-11 from the table above.
+````
+SELECT * FROM Orders
+WHERE OrderDate ='2008-11-11'
+````
+Result-set:
+
+|OrderId|ProductName|OrderDate|
+|---|---|---|
+|1|Geitost|2008-11-11|
+|3|Mozzarella di Giovanni|2008-11-11|
+
+💡 If we add a time component in the OderDate column and run the same query.
+
+|OrderId|ProductName|OrderDate|
+|---|---|---|
+|1|Geitost|2008-11-11 13:23:44|
+|2|Camembert|2008-11-09 15:45:21|
+|3|Mozzarella di Giovanni|2008-11-11 11:12:01|
+|4|Mascarpone|2008-10-29 14:56:59|
+
+````
+SELECT * FROM Orders 
+WHERE OrderDate = '2008-11-11'
+````
+Result-set
+We will get no result. This is because the query is looking for dates with no time portion.
+
+-----------------
+### SQL NULL Values
+
+- NULL values represent missing unknown data.
+- By default, a table column can hold NULL values.
+- If a column in a table is optional, we can insert a new record or update an existing record without adding value to this column. This means that the field will be saved with a NULL value.
+- NULL values are treated differently from other values.
+- NULL is used as a placeholder for unknown or inapplicable values.
+- It is not possible to compare NULL and 0 ; they are not equivalent.
+- It is not possible to test for NULL values with comparison operators, such as =, <, >, <> . we will have to use the IS NULL and IS NOT NULL operators instead.
+
+For Example if the "persons" table looks like this:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |           |Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|           |Stavanger|
+
+If the "Address" column in the "persons" table is optional. This means that if we insert a record with no value for "Address" column will be saved with a NULL value.
+
+### IS NULL 
+Always use IS NULL to look for NULL values.
+
+Example :
+**Select only the records with NULL values in the "Address"column.**
+
+For this we will have to use IS NULL operator:
+````
+SELECT LastName,FirstName,Address
+FROM Address IS NULL
+````
+Result-set:
+
+| LastName  |FirstName   | Address  |
+|---|---|---|
+|Hansen  |Ola |           |
+|Pettersen|Kari|           |
+
+### IS NOT NULL
+To select only the records with no NULL values in the "Address" column.
+For this we will use the IS NOT NULL operator.
+
+````
+SELECT LastName,FirstName,Address
+FROM Address IS NOT NULL
+````
+Result-set:
+
+| LastName  |FirstName   | Address  |
+|---|---|---|
+|Svendson |Tove | Borgvn 23|
+
+-----------
+### SQL NULL Functions
+- ISNULL()
+- NVL()
+- IFNULL()
+- COALESCS()
+
+The "Products" table:
+
+|P_id|ProductName|UnitPrice|UnitsInStock|UnitsOnOrder
+|---|---|---|---|---|
+|1|Jarlsberg |10.45|16|15|
+|2|Mascarpone |32.56|23| |
+|3|Gorgonzola |15.67 |9 | 20|
+
+Suppose that the "UnitOnOrder" column is optional and may contain NULL values.
+````
+SELECT ProductName,UnitPrice*(UnitInStock + UnitsOnOrder)
+FROM Products
+````
+In this example if any of the "UnitsOnOrder" values are NULL, the result will be NULL.
 
 
+- **Microsoft's ISNULL()**** function is used to specfiy how we want to treat NULL values.
+- The NVL( ), IFNULL() and COALESCS() functions can also be used to achive the same result .
+
+In thid case we want NULL values to be zero.
+
+- If the "UnitOnOrder" is NULL, it will not harm the calculation because ISNULL() returns a zero if thr value is NULL.
+
+**SQL Server /MS Access :**
+````
+SELECT ProductName,UnitPrice * (UnitInStck + ISNULL(UnitsOnOrder,0))
+FROM Products
+````
+
+**Oracle**
+Oracle does not have an ISNULL() function. However, we can use the NVL() function to achieve the same result:
+````
+SELECT ProductName,UnitPrice * (UnitInStck + NVL(UnitsOnOrder,0))
+FROM Products
+````
+
+**MySQL**
+
+MySQL does have an ISNULL() function. However, it works a little different from Microsoft's ISNULL() function.
+
+In MySQL we can use the IFNULL() function:
+````
+SELECT ProductName,UnitPrice*(UnitInStock + IFNULL(UnitsOnOrder,0))
+FROM Products
+````
+Or we can use the COALESCS() function:
+````
+SELECT ProductNmae,UnitPrice*(UnitsInStock + COALESCS(UnitsOnOrder,0))
+FROM Products
+````
+
+------------------------------
+### SQL Data Types
+
+Data types and ranges for Microsoft Access, MySQL and SQL Server.
+
+-----------------
+
+### Microsoft Access Data Types:
+
+|Data types|Descrition |Storage |
+|---|---|---|
+|Text |Use for text or combinations of text and numbers. 225 character maximum||
+|Memo|Memo is used for large amounts of text. Stores up to 65,536 characters.Note:You cannot sort a memo field, however they are searchable.||
+|Byte |allows whole numbers from 0 to 225|1 byte|
+|Integer |Allow whole number between -32,768 and 32,767|2 bytes|
+|Long|Allows whole numbers between -2,147,483,648 and 2,147,483,648 |4 bytes|
+|Single|Single precision floating-point. will handle most decimals |4 bytes |
+|Double|Double precision floating-point. Will handle most decimals |8 bytes |
+|Currency |Use for currency. Holds up to 15 digits of whole dollars, plus 4 decimal places. **Tip:**You can choose which country's currency to use |8 bytes |
+|AutoNumber |AutoNumber fields automatically give each record its own number, usually starting at 1 |4 bytes |
+|Date/Time |Use for dates and times |8bytes |
+|Yes/No|A logic fields can be displayed as Yes/No, True/False or On/Off. In code use the constants True and False (equivqlent to- 1 and 0).**NOTE:**Null values are not allowed in Yes/No fields |1 bit |
+|Ole Object|Can store pictures audio, video or other BLOBs(Binary large objects) |up to 1GB|
+|Hyperlink|Contain links to other files, including web pages |  |
+|Lookup Wizard|Let you type a list of options which can then be chosen from a drop-down list |4 bytes |
+
+
+--------
+### MySQL Data Types 
 
 
 
