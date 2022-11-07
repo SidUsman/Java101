@@ -2108,24 +2108,388 @@ Data types and ranges for Microsoft Access, MySQL and SQL Server.
 
 |Data types|Description |Storage |
 |---|---|---|
-|Text |Use for text or combinations of text and numbers. 225 character maximum||
-|Memo|Memo is used for large amounts of text. Stores up to 65,536 characters.Note:You cannot sort a memo field, however they are searchable.||
-|Byte |allows whole numbers from 0 to 225|1 byte|
+|Text   |Use for text or combinations of text and numbers. 225 character maximum||
+|Memo   |Memo is used for large amounts of text. Stores up to 65,536 characters.Note:You cannot sort a memo field, however they are searchable.||
+|Byte   |allows whole numbers from 0 to 225|1 byte|
 |Integer |Allow whole number between -32,768 and 32,767|2 bytes|
-|Long|Allows whole numbers between -2,147,483,648 and 2,147,483,648 |4 bytes|
-|Single|Single precision floating-point. will handle most decimals |4 bytes |
-|Double|Double precision floating-point. Will handle most decimals |8 bytes |
-|Currency |Use for currency. Holds up to 15 digits of whole dollars, plus 4 decimal places. **Tip:** You can choose which country's currency to use |8 bytes |
-|AutoNumber |AutoNumber fields automatically give each record its own number, usually starting at 1 |4 bytes |
+|Long   |Allows whole numbers between -2,147,483,648 and 2,147,483,648 |4 bytes|
+|Single  |Single precision floating-point. will handle most decimals |4 bytes |
+|Double   |Double precision floating-point. Will handle most decimals |8 bytes |
+|Currency    |Use for currency. Holds up to 15 digits of whole dollars, plus 4 decimal places. **Tip:** You can choose which country's currency to use |8 bytes |
+|AutoNumber  |AutoNumber fields automatically give each record its own number, usually starting at 1 |4 bytes |
 |Date/Time |Use for dates and times |8bytes |
-|Yes/No|A logic fields can be displayed as Yes/No, True/False or On/Off. In code use the constants True and False (equivalent to- 1 and 0).**NOTE:**Null values are not allowed in Yes/No fields |1 bit |
-|Ole Object|Can store pictures audio, video or other BLOBs(Binary large objects) |up to 1GB|
-|Hyperlink|Contain links to other files, including web pages |  |
-|Lookup Wizard|Let you type a list of options which can then be chosen from a drop-down list |4 bytes |
+|Yes/No  |A logic fields can be displayed as Yes/No, True/False or On/Off. In code use the constants True and False (equivalent to- 1 and 0).**NOTE:** Null values are not allowed in Yes/No fields |1 bit |
+|Ole Object  |Can store pictures audio, video or other BLOBs(Binary large objects) |up to 1GB|
+|Hyperlink   |Contain links to other files, including web pages |  |
+|Lookup Wizard    |Let you type a list of options which can then be chosen from a drop-down list |4 bytes |
 
 
 --------
 ### MySQL Data Types 
+In MySQL there are three main types:
+- Text
+- Number 
+- Date/Time
+
+### Text Types:
+
+|Data Type | Description |
+|---|---|
+|CHAR(size)|Holds a fixed length string(can contain letters, numbers and special character). The fixed size is specified in parenthesis. Can store up to 225 characters|
+|VARCHAR(size) |Holds a variable length string(can contain letters, numbers and special characters). The maximum size is specified in parenthesis. Can store up to 225 character. **Note:** If you put a greater value than 225 it will be converted to a TEXT type |
+|TINYTEXT|Holds a string with a maximum length of 225 characters|
+|TEXT |Holds a string with a maximum length of 65,535 characters|
+|BLOB |For BLOBs, hold up to 65,535 bytes of data |
+|MEDIUMTEXT |Holds a string with a maximum length of 16,777,215 character |
+|LONGTEXT |Holds a string with a maximum length of 4,294,967,295 characters|
+|MEDIUMBLOB |For BLOBs. Holds up to 16,777,215 bytes of data |
+|LONGBLOB |For BLOBs, Holds up to 4,294,697,295 bytes of data |
+|ENUM(x,y,z,etc) |Let you enter a list of possible values. You can list up to 65535 values in an ENUM list.If a value is inserted that is not in the list a blank value will be inserted . **NOTE:** The values are sorted in the order you enter them. You enter the possible values in this format: ENUM('X','Y','Z') |
+|SET |Similar to ENUM except that SET may contain up to 64 list items and can store more than one choice |
+
+------------
+### Number Types:
+
+|Data Types | Description |
+|---|---|
+|TINYINT(size) |-128 to 127 normal. 0 to 225 UNSIGNED*. The maximum number of digits may be specified in parenthesis |
+|SMALLINT(size) |-32768 to 32767 normal. 0 to 65535 UNSIGNED*. The maximum number of digits may be specified in parenthesis |
+|MEDIUMINT(size) |-8388608 to 8388607 normal. 0 to 16777215 UNSIGNED*. The maximum number of digits may be specified in parenthesis |
+|INT(size) |-2147483648 to 2147483647 normal. 0 to 4294967295 UNSIGNED*. The maximum number of digits may be specified in parenthesis |
+|BIGINT(size) |-922337203685475808 to 922337203685475807 normal. 0 to 18446744073709551615 UNSIGNED*. The maximum number of digits may be specified in parenthesis |
+|FLOAT(size,d) |A small number with a floating point. The maximum number of digits may be specified in the size parameter. The maximum number of digits to the right of the decimal point is specified in the d parameter |
+|DOUBLE(size,d) |A large number with a floating decimal point. The maximum number of digits may be specified in the size parameter. The maximum number of digits to the right of the decimal point is specified in the d parameter |
+|DECIMAL(size,d) |A DOUBLE stored as a string, allowing for a fixed decimal point. The maximum number of digits may be specified in the size parameter. The maximum number of digits to the right of the decimal point is specified in the d parameter |
+
+*The integer types have an extra option called UNSIGNED. Normally, the integer goes from a negative to positive value. Adding the UNSIGNED attribute will move that range up so it starts at zero instead of a negative number.
+
+---------------
+### Date Types:
+
+|Date types|Description |
+|---|---|
+|DATE()     |A date. Format:YYYY-MM-DD **NOTE:** The supported range is from '1000-01-01' to '9999-12-31'|
+|DATETIME() |*A date and time combination. Format: YYYY-MM-DD HH:MM:SS  **NOTE:** The supported range is from '1000-01-01 00:00:00' to '9999-12-31'|
+|TIMESTAMP() |*A timestamp. TIMESTAMP values are stored as the number of seconds since the Unix epoch('1970-01-01 00:00:00' UTC). Format: YYYY-MM-DD HH:MM:SS **NOTE:** The supported range is from '1970-01-01 00:00:01' UTC to 2038-01-09 03:14:07' UTC |
+|TIME() |A TIME. FORMAT :HH:MM:SS **NOTE:** The supported range is from '-838:59:59' to '838:59:59'|
+|YEAR() |A year in two-digit or four-digit format. **NOTE:** Values allowed in four digit format: 1901 to 2155. Values allowed in twodigit format:70 to 69, respecting years from 1970 to 2069 |
+
+*Evan if DATETIME AND TIMESTAMP return the same format, they work very differently. In an INSERT or UPDATE query the TIMESTAMP automatically set itself to current date and time. TIMESTAMP also accepts various formats like YYYYMMDDHHMMSS, YYMMDDHHMMSS, YYYYMMDD or YYMMDD.
+
+----------------
+### SQL Server Data Types 
+
+**Character strings:**
+
+|Data type |Description |Storage |
+|---|---|---|
+|char(n)   |Fixed-length character string. Maximum 8,000 character |n|
+|varchar(n) |Fixed-length character string. Maximum 8,000 character |  |
+|varchar(max)  |Fixed-length character string. Maximum 1,073,741,824 character |  |
+|text    |Fixed-length character string. Maximum 2GB of text data |  |
+
+**Unicode strings:**
+
+|Data type |Description |Storage |
+|---|---|---|
+|nchar(n)   |Fixed-length Unicode data. Maximum 4,000 character | |
+|nvarchar(n) |Fixed-length Unicode data. Maximum 4,000 character |  |
+|nvarchar(max)  |Fixed-length Unicode data. Maximum 536,870,912 character |  |
+|ntext    |Fixed-length Unicode data. Maximum 2GB of text data |  |
+
+**Binary types:**
+
+|Data type |Description |Storage |
+|---|---|---|
+|bit  |Allows 0,1 or NULL |  |
+|binary(n)   |Fixed-length binary data. Maximum 8,000 bytes| |
+|varbinary(n) |Fixed-length binary data. Maximum 8,000 bytes |  |
+|varbinary(max)  |Fixed-length binary data. Maximum 2GB |  |
+|image    |Fixed-length binary data. Maximum 2GB |  |
+
+**Number types:**
+
+|Data type |Description |Storage |
+|---|---|---|
+|tinyint |Allows whole numbers from 0 to 225 |1 byte |
+|smallint |Allow whole number between -32,768 and 32,768 |2 bytes |
+|int |Allows whole number between -2147483648 and 2147483647 |4 bytes |
+|bigint |Allows whole numbers between -922337203685475808 and 922337203685475808 |8 bytes |
+|decimal(p,s) |Fixed precision and scale numbers. Allows numbers from -10^38 to 10^38-1. The p parameter indicates the maximum total number of digit that can be stored ,both to the left and to the right of the decimal point, p must be a value from 1 to 38. default is 18. The s parameter indicated the maximum number of digits stored to the right of the decimal point. s must be a value from 0 to p. Default value is 0    |5-17 bytes |
+|numeric(p,s) |Fixed precision and scale numbers. Allows numbers from -10^38 to 10^38-1. The p parameter indicates the maximum total number of digit that can be stored ,both to the left and to the right of the decimal point, p must be a value from 1 to 38. default is 18. The s parameter indicated the maximum number of digits stored to the right of the decimal point. s must be a value from 0 to p. Default value is 0    |5-17 bytes |
+|smallmoney |Monetary data from -214,748.3648 to 214,748.3648 |4 bytes|
+|money |Monetary data from -922,337,203,658,477.5008 to 922,337,203,658,477.5007 |8 bytes|
+|float(n) |Floating precision number data from -1.79E + 308 to 1.79E + 308. The n parameter indicates whether the field should hold 4 or 8 bytes. float(24) holds a 4-byte field and float (53) holds an 8-bytes field. Default value of n is 53. |4 to 8 bytes |
+|real |Floating precision number data from -3.40E + 3.40E +38 |4 bytes |
+
+------------------------------
+**Date types:**
+
+|Data type |Description |Storage |
+|---|---|---|
+|datetime |From January 1,1753 to December 31,9999 with an accuracy of 3.33 millisecond|8 bytes|
+|datetime2|From January 1,1753 to December 31,9999 with an accuracy of 100 nanosecond |6-8 bytes |
+|smalldatetime|From January 1,1900 to June 6,2079 with an accuracy of 1 minute |4 bytes |
+|date |Store a date only. From January 1,0001 to December 31,9999 |3 bytes |
+|time|Store a time only to an accuracy of 100 nanoseconds |3-5 bytes |
+|datetimeoffset |The same as datetime2 with the addition of a time zone offset |8-10 bytes |
+|timestamp|Stores a unique number that gets updated every time a row gets created or modified. The timestamp value is based upon an internal clock and does not correspond to real time. Each table may have only one timestamp variable ||
+
+**Other data types:**
+
+|Data type |Description |
+|---|---|
+|sql_variant |Stores up to 8000 bytes of data of various types except text, ntext and timestamp |
+|unique identifier |Stores a globally unique identifier (GUID) |
+|xml |Stores XML formatted data. Maximum 2GB |
+|cursor |Stores a reference to a cursor used for database operations |
+|table |Stores a result-set for later processing |
+
+----------------------------
+### SQL Functions 
+SQl has many built-in functions for performing calculations on data.
+
+------------------------
+### SQL Aggregate Functions
+SQL aggregate functions return a single value, calculated from values in a column.
+
+Useful aggregate functions:
+- AVG() - Returns the average value
+- COUNT() - Returns the number of rows 
+- FIRST() - Returns the first value
+- LAST() - Returns the last value
+- MAX() - Returns the largest value
+- MIN() - Returns the smallest value
+- SUM() - Returns the sum
+
+------------------------
+### SQL Scalar Functions
+
+SQL scalar functions return a single value, based on the input value.
+
+Useful scalar functions:
+- UCASE() - Converts a field to upper case 
+- LCASE() - Converts a field to lower case
+- MID() - Extract characters from a text field
+- LEN() - Returns the length of a text fields 
+- ROUND() - Rounds a numeric field to the number of decimals specified
+- NOW() - Returns the current system date and time
+- FORMAT() - Formats how a field is to be displayed
+
+---------------------
+### SQL AVG() Function
+The AVG() function returns the average values of numeric column.
+Syntax:
+````
+SELECT AVG(column_name)
+FROM table_name
+````
+
+Example:
+The Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find the average value of the "OrderPrice" fields:
+````
+SELECT AVG(OrderPrice) AS OrderAverage 
+FROM Orders
+````
+Result-set:
+
+|OrderAverage |
+|---|
+|950 |
+
+
+Now we want to find the customers that have an OrderPrice value higher than the average OrderPrice value:
+````
+SELECT Customer
+FROM OrderPrice > (SELECT AVG (OrderPrice) FROM Orders)
+````
+Result-set:
+
+|Customer |
+|---|
+|Hansen |
+|Nilsen |
+Jensen |
+
+---------
+### SQL COUNT() Function
+The COUNT() function returns the number of rows that matches a specified criteria.
+
+### SQL COUNT(column_name) Syntax:
+The COUNT(column_name) function returns the number of values (NULL values will not be counted) of the specified column:
+````
+SELECT COUNT(column_name)
+FROM table_name
+````
+
+### SQL COUNT(*) Syntax:
+The COUNT(*) function returns the number of records in a table:
+````
+SQL COUNT(*) 
+FROM table_name
+````
+
+### SQL COUNT(DISTINCT column_name) Syntax:
+The COUNT(DISTINCT column_name) function returns the number of distinct values of the specified column:
+````
+SELECT COUNT(DISTICT column_name)
+FROM table_name
+````
+**NOTE:** COUNT(DISTINCT) works with ORACLE and Microsoft SQL Server but not with Microsoft Access.
+
+---------------
+### SQL COUNT(column_name) Example:
+The Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Count the number of orders from customer Nilsen:
+````
+SELECT COUNT(Customer) AS CustomerNilsen 
+FROM Orders
+WHERE Customer = 'Nilsen'
+````
+Result-set:
+
+|CustomerNilsen |
+|---|
+|2|
+
+--------
+### SQL COUNT(*) Example:
+If we omit the WHERE clause;
+````
+SELECT COUNT(*) AS NumberOfOrders
+FROM Orders
+````
+Result-set:
+
+|NumberOfOrders|
+|---|
+|6|
+
+-------------
+### SQL COUNT(DISTINCT column_name) Example:
+Count the number of unique customers in the "Orders" table:
+````
+SELECT COUNT (DISTINCT Customers) AS NumberOfOrders
+FROM Orders
+````
+Result-set   :
+
+|NumberOfOrders|
+|---|
+|3 |
+which is the number of unique customers Hansen,Nilsen and Jensen in the Orders table.
+
+-------------------
+### SQL FIRST() Function
+The FIRST() function returns the first value of the selected column.
+**syntax:**
+````
+SELECT FIRST (column_name)
+FROM table_name
+````
+**Example:**
+The Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find the first value of the"OrderPrice" column:
+````
+SELECT FIRST (OrderPrice) AS FirstOrderPrice
+FROM orders
+````
+
+**Tip:** Workaround if FIRST() function is not supported:
+````
+SELECT OrderPrice
+FROM orders
+ORDER BY O-id LIMT 1
+````
+Result-set:
+
+|OrderPrice |
+|---|
+|1000|
+
+----------------
+### SQL LAST() Function
+The LAST() function returns the last value of the selected column.
+**Syntax:**
+````
+SELECT LAST(column_name)
+FROM table_name
+````
+
+**Example:**
+Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find the last value of the column"OderPrice"
+````
+SELECT LAST(OrderPrice) AS LastOrderPrice
+FROM Orders
+````
+
+**Tip:** Workaround if LAST() function is not supported:
+````
+SELECT OrderPrice
+FROM orders
+ORDER BY O-id DESC LIMT 1
+````
+Result-set:
+
+|LastOrderPrice |
+|---|
+|100|
+
+-----------------------
+### SQL MAX() Function
+
+
+
+
+
+
+
+
+
+
+
 
 
 
