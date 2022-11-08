@@ -2479,26 +2479,501 @@ Result-set:
 
 -----------------------
 ### SQL MAX() Function
+The MAX() function returns the largest value of the selected column.
+SYNTAX:
+````
+SELECT MAX(column_name)
+FROM tavle_name
+````
+**Example:**
+Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find the largest value of the "OrderPrice" column.
+````
+SELECT MAX(OrderPrice) AS LargestOrderPrice
+FROM Orders
+````
+Result-set:
+|LargestOrderPrice|
+|---|
+|2000|
+
+----------------------------------------
+### SQL MIN() Function 
+The minmum function returns tge smallast value of the selected column.
+
+SYNTAX:
+````
+SELECT MIN(column_name)
+FROM table_name
+````
+
+EXAMPLE:
+
+Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find the smallest value of the "OrderPrice" column.
+````
+SELECT MIN(OrderPrice) AS SmallestOrderPrice 
+FROM Orders
+````
+
+Result-set:
 
 
+|SmallestOrderPrice |
+|---|
+|100|
+
+--------------------------
+### SQL SUM() Function
+The SUM() function returns the total sum of a numeric column.
+
+SYNTAX:
+````
+SELECT SUM(column_name)
+FROM table_name
+````
+
+EXAMPLE:
+
+Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find the sum of all "OrderPrice" field:
+````
+SELECT MIN(OrderPrice) AS OrderTotal 
+FROM Orders
+````
+Result-set:
+
+|OrderTotal |
+|---|
+|5700|
+
+--------------------------
+### SQL GROUP BY Statement 
+
+Aggregate functions often need GROUP BY statement.
+The GROUP BY statement is used in conjection with the aggregate functions to group the result-set by one or more columns.
+
+SYNTAX:
+````
+SELECT column_name,aggregate_function(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name
+````
+
+EXAMPLE:
+Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find the total sum(total order) of each customer.
+````
+SELECT Customer,SUM(OrderPrice)
+FROM Orders
+GROUP BY Customer
+````
+
+Result-st:
+
+|Customer|SUM(OrderPrice)|
+|---|---|
+|Hansen |2000 |
+|Nilsen |1700 |
+|Jensen |2000 |
+
+If we omit the GROUP BY statement:
+```` 
+SELECT Customer,SUM(OrderPrice)
+FROM Orders
+````
+Result-set:
+
+|Customer|SUM(OrderPrice)|
+|---|---|
+|Hansen |5700 |
+|Nilsen |5700 |
+|Hansen |5700 |
+|Hansen |5700 |
+|Jensen |5700 |
+|Nilsen |5700 |
+
+The result set above is not what we wanted :
+**EXPLANATION:**
+The SELECT statement above has two columns specified (Customer and SUM (OrderPrice))
+The "SUM(OrderPrice)" returns a single value(that is the total sum of the "OrderPrice" column),while "Customer" returns 6 values(one value for each row in the "Order" table).
+This will therefore not give us the correct result.However, you have seen that the GROUP BY statement solves this problem.
+
+-------------------------
+### GROUP BY More Than One Column
+We can also use the GROUP BY  statement on more than one column:
+````
+SELECT Customer,OrderDate,SUM(OrderPrice)
+FROM Orders
+GROUP BY Customer,OrderDate
+````
+
+--------------------------
+### SQL HAVING Clause
+The HAVING clause was added to SQL beacuse the WHERE keyword could not be used with aggregate functions.
+
+SQL HAVING Syntax:
+````
+SELECT column_name,aggregate_function(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name
+HAVING aggregate_function(column_name) operator value
+````
+
+EXAMPLE 1:
+Orders Table :
+
+|O-id |OrderDate |OrderPrice |Customer |
+|---|---|---|---|
+|1|2008/11/12 |1000 |Hansen |
+|2|2008/10/23 |1600 |Nilsen |
+|3|2008/09/02 |700 |Hansen |
+|4|2008/09/03 |300 |Hansen |
+|5|2008/08/30 |2000 |Jensen |
+|6|2008/10/04 |100 |Nilsen |
+
+Find if any of the customers have a total order of less than 2000.
+````
+SELECT customer,SUM(OrderPrice)
+FROM Orders
+GROUP BY customer
+HAVING SUM(OrderPrice) < 2000
+````
+
+Result-set:
+
+|Customer | SUM(OrderPrice) |
+|---|---|
+|Nilsen |1700 |
+
+EXAMPLE 2:
+Find if the customers "Hensen" or "jensen" have a total order of more than 1500:
+````
+SELECt Customer,SUM(OrderPrice)
+FROM Orders
+WHERE Customer ='Hensen' OR Customer= 'Jensen'
+GROUP BY Customer
+HAVING SUM (OrderPrice) > 1500
+````
+Result-set:
+|Customer |SUM(OrderPrice)|
+|---|---|
+|Hansen |2000 |
+|Jensen |2000 |
+
+------------------------
+### SQL UCASE() Function
+The UCASE() function converts the values of a field to uppercase.
+
+SQL SYNTAX:
+````
+SELECT UCASE (column_name)
+FROM table_name
+````
+
+SYNTAX FOR SQL SERVER:
+````
+SELECT UPPER (column_name)
+FROM table_name
+````
+
+EXAMPLE :
+Persons table:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |  Timotevin 10         |Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|     Storget 20      |Stavanger|
+
+Now we want to select the content of the "LastName" and "FirstName" columns above and convert the "LastName" column to uppercase.
+````
+SELECT UCASE(LastName) as LastName,FirstName
+FROM Persons
+````
+Result-set:
+
+|LastName |FirstName|
+|---|---|
+|HANSEN|Ola |
+|SVENDSON |Tove |
+PETTERSEN |Kari |
+
+-------------------
+### SQL LCASE() Function
+The LCASE() function converts the values of a field to lowercase.
+
+SQL SYNTAX:
+````
+SELECT LCASE (column_name)
+FROM table_name
+````
+
+SQL SERVER SYNTAX:
 
 
+EXAMPLE :
+Persons table:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |  Timotevin 10         |Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|     Storget 20      |Stavanger|
+
+Now we want to select the content of the "LastName" and "FirstName" columns above and convert the "LastName" column to lowercase.
+````
+SELECT UCASE(LastName) as LastName,FirstName
+FROM Persons
+````
+Result-set:
+
+|LastName |FirstName|
+|---|---|
+|hansen|Ola |
+|svendson|Tove |
+|pettersen |Kari |
+
+----------------
+### SQL MID() Function
+The MID() function is used to extract characters from a text field.
+
+SQL MID() Syntax:
+````
+SELECT MID(column_name,start,[length])
+FROM table name
+````
+
+|Parameter |Description|
+|---|---|
+|column_name |Required. The field to extract chacters from|
+|start |Required. Specifes the starting position(start at 1)|
+|length |Optional. The number of  characters to return. If omitted, the MID() function returns the rest of the text|
 
 
+EXAMPLE:
+Persons table:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |  Timotevin 10         |Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|     Storget 20      |Stavanger|
+
+Find the first four characters of the "city" column above:
+````
+SELECT MID (City,1,4) AS SmallCity
+FROM persons
+````
+
+Result-set:
+
+|SmallCity |
+|---|
+|Sand |
+|Sand |
+|Stav |
+
+---------------------------------
+### SQL LEN() Function
+The LEN() function returns the length of a value in a field.
+
+SQL Syntax:
+````
+SELECT LEN(column_name)
+FROM table_name
+````
+
+EXAMPLE:
+Persons table:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |  Timotevin 10         |Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|     Storget 20      |Stavanger|
+
+Select the length of the values in the "Address" column:
+````
+SELECT LEN(Address) AS LengthOfAddress
+FROM Persons
+````
+
+RESULT_SET:
+
+|LengthOfAddress|
+|---|
+|12 |
+|9|
+|9|
 
 
+-------------------------
+### SQL ROUND() Function
+The ROUND() function is used to round a numeric field to the number of decimals specified.
+SQL ROUND() Syntax:
+````
+SELECT ROUND(column_name,decimals)
+FROM table_name
+````
+
+|Parameter |Description|
+|---|---|
+|column_name |Required. The field to round |
+|decimals |Required. Specifes the number of decimals to be returned |
+
+EXAMPLE:
+Persons table:
+
+|P_id  | LastName  |FirstName   | Address  | City |
+|---|---|---|---|---|
+| 1 |Hansen  |Ola |  Timotevin 10         |Sandnes |
+|2 |Svendson |Tove | Borgvn 23|Sandnes|
+|3 |Pettersen|Kari|     Storget 20      |Stavanger|
+
+Display the product name and the price rounded to the nearest integer.
+
+````
+SELECT ProductName,ROUND(unitPrice,0) AS UnitPrice
+FROM Products
+````
+RESULT-SET:
+
+|ProductName |UnitPrice |
+|---|---|
+|Jarlsberg |10|
+|Mascarpone |33|
+|Gorgonzola |16|
+
+---------------------------
+### SQL NOW() Function
+The NOW() function returns the current system data and time.
+
+SQL SYNTAX:
+````
+SELECT NOW()
+FROM table_name
+````
+
+EXAMPLE:
+"Products" Table:
+
+|P_id|ProductName |Unit|UnitPrice |
+|---|---|---|---|
+|1|Jarlsberg |1000g |10.45|
+|2|Mascarpone |1000g |33.56|
+|3|Gorgonzola|1000g |16.67|
+
+Display the products and peice per today's date:
+````
+SELECT ProductName,UnitPrice,NOW() AS PerDate
+FROM Products
+````
+
+RESULT-SET
+
+|ProductName |UnitPrice |PerDate |
+|---|---|---|
+|Jarlsberg |10.45|10/7/2008 11:25:02 AM |
+|Mascarpone |33.56|10/7/2008 11:25:02 AM |
+|Gorgonzola |16.67|10/7/2008 11:25:02 AM |
 
 
+-------------------
+###SQL FORMAT() Function
 
+The FORMAT() function is used to format how a field is to be displayed.
 
+SQL FORMAT() Syntax:
+````
+SELECT FORMAT(column_name,format)
+FROM table_name
+````
 
+|Parameter |Description|
+|---|---|
+|column_name |Required. The field to be formatted  |
+|format |Required. Specifies the format |
 
+EXAMPLE:
+"Products" Table:
 
+|P_id|ProductName |Unit|UnitPrice |
+|---|---|---|---|
+|1|Jarlsberg |1000g |10.45|
+|2|Mascarpone |1000g |33.56|
+|3|Gorgonzola|1000g |16.67|
 
+Display the products and price per today's date(with today's date displayed in the following format "YYYY-MM-DD"):
+````
+SELECT ProductName,UnitPrice,FORMAT(NOW(),'YYYY-MM-DD') AS PerDate
+FROM Persons
+````
+RESULT-SET
 
+|ProductName |UnitPrice |PerDate |
+|---|---|---|
+|Jarlsberg |10.45|2008-10-07 |
+|Mascarpone |33.56|2008-10-07 |
+|Gorgonzola |16.67|2008-10-07 |
 
+--------------------
+## SQL QUICK REFERENCE
 
-
-
-
-
+|SQL STATEMENT | SYNTAX |
+|---|---|
+|AND/OR |SELECT column_name <br>FROM table_name <br> WHERE condition <br> AND /OR condition |
+|ALTER TABLE|ALTER table_name <br>ADD column_name datatype <br> <br> OR <br> <br> ALTER TABLE table_name <br> DROP COLUMN column_name |
+|AS(alias)|SELECT column_name AS column_alias <br> FROM table_name <br> <br> OR <br> <br> SELECT column_name  <br>FROM table_name AS table_alias |
+|BETWEEN|SELECT column_name(s) <br> FROM table_name <br> WHERE column_name <br> BETWEEN value1 AND value2 |
+|CREATE DATABASE | CREATE DATABASE database_name |
+|CREATE TABLE |CREATE TABLE table_name <br> ( <br> column_name1 data_type, <br> column_name2 data_type, <br> column_name3 data_type, <br> ....<br> ) |
+|CREATE INDEX |CREATE INDEX index_name  <br> ON table_name(column_name)   <br> <br> OR <br> <br> CREATE UNIQUE INDEX index_name  <br> ON table_name(column_name) |
+|CREATE VIEW |CREATE VIEW view_name AS <br> SELECT column_name(s) <br> FROM table_name  <br>WHERE condition |
+|DELETE | DELETE FROM table_name <br>WHERE some_column = some_value <br><br>OR <br><br> DELETE FROM table_name <br>(**NOTE:**Deletes the entire table) <br> <br>DELETE * FROM table_name <br>(**NOTE:**Deletes the entire table) |
+|DROP DATABASE |DROP DATABASE database_name |
+|DROP INDEX |DROP INDEX table_name.index_name(SQL Server) <br> DROP INDEX index_name ON table_name (MS Access) <br> DROP INDEX index_name (DB2/Oracle) <br> ALTER TABLE table_name <br>DROP INDEX index_name (MySQL) |
+|DROP TABLE |DROP TABLE table_name |
+|GROUP BY |
