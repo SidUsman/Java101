@@ -2161,7 +2161,7 @@ In MySQL there are three main types:
 |DOUBLE(size,d) |A large number with a floating decimal point. The maximum number of digits may be specified in the size parameter. The maximum number of digits to the right of the decimal point is specified in the d parameter |
 |DECIMAL(size,d) |A DOUBLE stored as a string, allowing for a fixed decimal point. The maximum number of digits may be specified in the size parameter. The maximum number of digits to the right of the decimal point is specified in the d parameter |
 
-*The integer types have an extra option called UNSIGNED. Normally, the integer goes from a negative to positive value. Adding the UNSIGNED attribute will move that range up so it starts at zero instead of a negative number.
+*The integer types have an extra option called UNSIGNED. Normally, the integer goes from a negative to positive value. Adding the UNSIGNED attribute will move that range up, so it starts at zero instead of a negative number.
 
 ---------------
 ### Date Types:
@@ -2906,7 +2906,7 @@ EXAMPLE:
 |2|Mascarpone |1000g |33.56|
 |3|Gorgonzola|1000g |16.67|
 
-Display the products and peice per today's date:
+Display the products and price per today's date:
 ````
 SELECT ProductName,UnitPrice,NOW() AS PerDate
 FROM Products
