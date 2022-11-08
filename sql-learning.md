@@ -2948,7 +2948,7 @@ EXAMPLE:
 
 Display the products and price per today's date(with today's date displayed in the following format "YYYY-MM-DD"):
 ````
-SELECT ProductName,UnitPrice,FORMAT(NOW(),'YYYY-MM-DD') AS PerDate
+SELECT ProductName,UnitPrice,FORMAT( NOW(),'YYYY-MM-DD') AS PerDate
 FROM Persons
 ````
 RESULT-SET
@@ -2972,8 +2972,27 @@ RESULT-SET
 |CREATE TABLE |CREATE TABLE table_name <br> ( <br> column_name1 data_type, <br> column_name2 data_type, <br> column_name3 data_type, <br> ....<br> ) |
 |CREATE INDEX |CREATE INDEX index_name  <br> ON table_name(column_name)   <br> <br> OR <br> <br> CREATE UNIQUE INDEX index_name  <br> ON table_name(column_name) |
 |CREATE VIEW |CREATE VIEW view_name AS <br> SELECT column_name(s) <br> FROM table_name  <br>WHERE condition |
-|DELETE | DELETE FROM table_name <br>WHERE some_column = some_value <br><br>OR <br><br> DELETE FROM table_name <br>(**NOTE:**Deletes the entire table) <br> <br>DELETE * FROM table_name <br>(**NOTE:**Deletes the entire table) |
+|DELETE | DELETE FROM table_name <br>WHERE some_column = some_value <br><br>OR <br><br> DELETE FROM table_name <br>(**NOTE:** Deletes the entire table) <br> <br>DELETE * FROM table_name <br>(**NOTE:** Deletes the entire table) |
 |DROP DATABASE |DROP DATABASE database_name |
 |DROP INDEX |DROP INDEX table_name.index_name(SQL Server) <br> DROP INDEX index_name ON table_name (MS Access) <br> DROP INDEX index_name (DB2/Oracle) <br> ALTER TABLE table_name <br>DROP INDEX index_name (MySQL) |
 |DROP TABLE |DROP TABLE table_name |
-|GROUP BY |
+|GROUP BY |SELECT column_name,aggregate_function(column_name) <br> FROM table_name <br> WHERE column_name operator value |
+|HAVING |SELECT column_name,aggregate_function(column_name) <br>FROM table_name  <br>WHERE column_name operator value <br>GROUP BY column_name <br>HAVING aggregate_function(column_name) operator value |
+|IN |SELECT column_name(s) <br> FROM table_name <br>WHERE column_name <br>IN (value1,value2,value3,....) |
+|INSERT INTO |INSERT INTO table_name <br>VALUES (value1, value2, value3,....) <br><br> or <br><br> INSERT INTO table_name <br>(column1, column2, column3,....) <br>VALUES(value1, value2, value3,....) |
+|INNER JOIN |SELECT column_name(s) <br>FROM table_name1 <br>INNER JOIN table_name2 <br>ON table_name1.column_name = table_name2.column_name |
+|LEFT JOIN |SELECT column_name(s) <br>FROM table_name1 <br>LEFT JOIN table_name2 <br>ON table_name1.column_name = table_name2.column_name |
+|RIGHT JOIN |SELECT column_name(s) <br>FROM table_name <br>RIGHT JOIN table_name2 <br>ON table_name1.column_name = table_name2.column_name |
+|FULL JOIN |SELECT column_name(s) <br>FROM table_name <br>FULL JOIN table_name2 <br>ON table_name1.column_name = table_name2.column_name |
+|LIKE |SELECT column_name(s) <br>FROM table_name <br>WHERE column_name LIKE pattern |
+|ORDER BY|SELECT column_name(s) <br>FROM table_name <br> ORDER BY column_name [ASC /DESC ] |
+|SELECT |SELECT column_name(s) <br>FROM table_name |
+|SELECT* |SELECT * <br> FROM table_name |
+|SELECT DISTINCT |SELECT DISTINCT column_name(s) <br> FROM table_name |
+|SELECT INTO |SELECT *  <br>INTO new_table_name [IN externaldatabase ] <br>FROM old_table_name  <br><br>or <br><br> SELECT column_name(s) <br>INTO new_table_name [IN externaldatabase ] <br>FROM old_table_name |
+|SELECT TOP |SELECT TOP number percent column_name(s) <br> FROM table_name |
+|TRUNCATE TABLE |TRUNCATE TABLE table_name |
+|UNION |SELECT column_name(s) FROM table_name1 <br>UNION <br>SELECT column_name(s) FROM table_name2 |
+|UNION ALL |SELECT column_name(s) FROM table_name1 <br>UNION ALL <br>SELECT column_name(s) FROM table_name2 |
+|UPDATE |UPDATE table_name <br> SET column1 = value, column2 = value,..... <br> WHERE some_column = some_value |
+|WHERE |SELECT column_name(s) <br>FROM table_name <br> WHERE column_name operator value |
