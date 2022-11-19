@@ -56,7 +56,7 @@ A database most often contains one or more tables. Each table is identified by a
 
 The table above contains three records, one for each person and five columns .
 
-----
+-------------
 #### SQL Statements 
 Most of the actions you need to perform on a database are done with SQL Statements.
 For example the following SQL Statement will select all the records in the "Persons" table.
@@ -91,7 +91,7 @@ SQL can be divided into two parts:
  - **CREATE INDEX** - create an index (search key)
  - **DROP INDEX** - delete an index 
 
-
+--------------------
 ####  SQL SELECT Statement 
 
 The SQL SELECT Statement is used to select data from a database.
@@ -116,6 +116,7 @@ EXAMPLE: the "Persons" table
 
 ##### ⇒  Select statement will be as:
 `SELECT LastName, FirstName FROM Persons` </br>
+
 result-set will be as :
 
 | LastName  |FirstName   |
@@ -182,9 +183,9 @@ Although Numeric values should not be enclosed in quotes.
 | = | Equal |
 |!=|Not Equal
 | <>| Not Equal|
-| >|Greater than  |
+| |Greater than  |
 | <|Less than  |
-|>= |Greater than or Equal |
+| > = |Greater than or Equal |
 |<=|Less than or Equal|
 |BETWEEN|Between an inclusive range|
 |LIKE|Search for a pattern|
