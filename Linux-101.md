@@ -3,7 +3,24 @@
 -----------------
 ### Introduction 
 Linux broadly refers to a free, open source operating system.
-just another name for kernel. A kernel allows software to communicate with a computer's hardware 
+just another name for kernel. A kernel allows software to communicate with a computer's hardware.
+Linux was inspired by MINIX which was inspired by Unix. Linux is free software under the GPL(GNU General Public License).
+
+### Linux Tools and Distributions
+* All linux system run a version of the Linux kernel.
+* Most Linux systems use the same set of core tools called the GNU coreutils.
+* Linux distributions are operating systems that include the kernel and various other pieces of software.
+* Distribution maintainer make choices about how their distributions are configured and what tools they provide.
+  
+    **Common Distribution Families:**
+  Many distributions are related to each other and all distributions differ in various ways.
+  The command line or shell is common to all of them. 
+  * Arch 
+  * Debian 
+  * Red Hat 
+  * Slackware
+
+
 
 
 |Command	|Usage |
