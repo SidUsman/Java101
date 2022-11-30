@@ -14,13 +14,79 @@ Linux was inspired by MINIX which was inspired by Unix. Linux is free software u
   
     **Common Distribution Families:**
   Many distributions are related to each other and all distributions differ in various ways.
-  The command line or shell is common to all of them. 
+  The command line or shell is common to all of them.(Bash shell is used widely) 
   * Arch 
   * Debian 
   * Red Hat 
   * Slackware
 
+### What is Command Line?
+The command line interpreter or Command-line processor uses a command-line interface(CLI) to receive commands from a user in the form of lines of text.
 
+Command-line also called Windows command-line, command screen or text-interface that navigate by typing commands at prompts instead of using a mouse.
+command-line programs can read text inputs and output text to the screen.
+command-line programs can read and write from files and network.
+
+### What is Bash?
+Bash is a widely used shell or command-line interpreter.
+
+**Using a terminal:**
+We use a shell like bash through a terminal application either in full screen mode or as windows in a graphical environment.
+we can use graphical and text base interface at the same time and even open more than one terminal window at the same time to perform different tasks.
+
+### Terminal terms:
+* Command-line interface(CLI) is any place we can enter text commands.
+* A shell is a piece of software that interprets typed commands and runs them.
+* Terminal is software that a shell program runs inside of.
+
+### General Command Syntax:
+In writing commands
+* There will always be a command.
+* There may be one or more options.
+    Option may accept arguments.
+* There may be one or more arguments.
+
+````
+Example:
+
+ls -lh /usr/bin
+sort -u user.text
+grep -i "needle" haystack
+
+In which there are three parts 
+command    option(s)   argument(s)
+ls          -lh         /usr/bin
+sort        -u          user.tex
+grep        -i"needle"  haystack
+
+````
+### Commands 
+* Commands are programs that are available on a system.
+* When we run a command, the system takes a specific action.
+* many commands have short names in order to save typing.e.g ls,du,cat.
+
+### Options 
+* Options tell a command how to operate.
+* Options often begin with a dash or minus sign e.g. -e  or -s .
+* Options are often represented by one letter or number.
+* Most commands offer more than one option.
+* Options can be used together. e.g. 
+```` 
+ls -l 
+ls -l -a -h 
+ls -l -a 
+ls -lhl
+ls --group-drirectories-first --human-readable
+
+````
+
+### Arguments 
+* Arguments tell the command what to operate on.
+* it is usually a file, path, set of files or directories separated by spaces.
+* An argument can also be a string of text or something else.
+````
+sort -u user.text
+````
 
 
 |Command	|Usage |
