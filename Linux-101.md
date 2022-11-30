@@ -207,6 +207,22 @@ The Linux file system follows a tree-like hierarchical structure starting at the
 
 ![file_system](sql-assets/filesystem.png)
 
+### Commands for File Information
+1. file - determine file type
+2. stat - display file status 
+
+Example:
+
+````
+$ file file.c file /dev/{wd0a,hda}
+           file.c:   C program text
+           file:     ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV),
+                     dynamically linked (uses shared libs), stripped
+           /dev/wd0a: block special (0/0)
+           /dev/hda: block special (3/0)
+           
+````
+
 
 
 
