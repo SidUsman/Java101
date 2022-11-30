@@ -99,6 +99,50 @@ sort -u user.text
 * Many common utilities come from the GNU coreutils.
 * The system provides ways for us to find programs
 
+
+|Command	|Usage |
+|---|---|
+|ls	|Lists the content of a directory|
+|alias	|Define or display aliases|
+|unalias|	Remove alias definitions|
+|pwd	|Prints the working directory|
+|cd	|Changes directory|
+|cp	|Copies files and directories|
+|rm	|Remove files and directories|
+|mv	|Moves (renames) files and directories|
+|mkdir	|Creates directories|
+|man	|Displays manual page of other commands|
+|touch	|Creates empty files
+|chmod	|Changes file permissions|
+|./	|Runs an executable|
+|exit|	Exits the current shell session|
+|sudo|	Executes commands as superuser|
+|shutdown	|Shutdowns your machine|
+|htop	|Displays processes and resources information|
+|unzip|	Extracts compressed ZIP files|
+|apt, yum, pacman	|Package managers|
+|echo	|Displays lines of text|
+|cat	|Prints file contents|
+|ps	|Reports shell processes status|
+|kill	|Terminates programs|
+|ping	|Tests network connectivity|
+|vim|	Efficient text editing|
+|history	|Shows a list of previous commands|
+|passwd	|Changes user password|
+|which	|Returns the full binary path of a program|
+|shred	|Overwrites a file to hide its contents|
+|less|	Inspects files interactively|
+|tail	|Displays last lines of a file|
+|head	|Displays first lines of a file|
+|grep	|Prints lines that match patterns|
+|whoami|	Outputs username|
+|whatis|	Shows single-line descriptions|
+|wc	|Word count files|
+|uname	|Displays OS information|
+|neofetch	|Displays OS and hardware information|
+|find	|Searches for files that follow a pattern|
+|wget	|Retrieves files from the internet|
+
 ## Finding help for commands 
 
 ### **man** Command for Manual pages:
@@ -120,12 +164,12 @@ syntax:
 username ~$ command --help
 
 username ~$ help
-(list commands with syntax for bash specific commans)
-e.g. 
+(list commands with syntax for bash specific commands)
+ 
 username ~$ ls --help
 ````
 ### apropos command 
-if we dont know the name of command we use apropos with text as argument and see description for number of results.
+if we don't know the name of command we use apropos with text as argument and see description for number of results.
 ````
 username ~$ apropos text
 
@@ -155,8 +199,12 @@ username ~$ apropos list
 
 ### The Linux file system 
 Linux file system is generally a built-in layers of a linux operating system used to handle the data management of the storage. <br>It helps to arrange the file on the disk storage. It manages the file name, file size, creation date and much more information about a file.
+
 <br>A Linux file system is a structured collection of files on a drive or a partition. A partion is a segment of memory and contains some specific data. In our machine there can be various partitions of the memory. Generally, every partition contains a file system.<br>
+
 The Linux file system follows a tree-like hierarchical structure starting at the root. It consists of **directories, sub-directorires and data files**. This structure follows a standard layout recommended by FIlesystem Hierarchy Standard(FHS), which is standard maintained by the Linux Founndation.
+
+
 ![file_system](sql-assets/filesystem.png)
 
 
