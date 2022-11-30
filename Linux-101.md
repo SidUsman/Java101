@@ -99,7 +99,7 @@ sort -u user.text
 * Many common utilities come from the GNU coreutils.
 * The system provides ways for us to find programs
 
-### Finding help for commands 
+## Finding help for commands 
 
 ### **man** Command for Manual pages:
 * The command man opens the manual pages.
@@ -112,6 +112,53 @@ username ~$ man ls
 checking the man pages for ls command 
 
 ````
+
+### help command 
+Give the brief info and lead to man pages
+syntax:
+````
+username ~$ command --help
+
+username ~$ help
+(list commands with syntax for bash specific commans)
+e.g. 
+username ~$ ls --help
+````
+### apropos command 
+if we dont know the name of command we use apropos with text as argument and see description for number of results.
+````
+username ~$ apropos text
+
+e.g.
+username ~$ apropos list
+````
+
+### Useful Keyboard Shortcuts
+**1. Tab completion:**
+  * Automatically complete a file or folder name.
+  * Make guesses based on the contents of the path.
+
+**2. Text navigation shortcuts:**
+  
+|Key Combination |Result |
+|---|---|
+|Ctrl-A(^A)  |Move to beginning of the line |
+|Ctrl-E(^E)  |Move to end of line <br> (A **line** is any text we type at the command prompt before pressing **return** )|
+|Ctrl-U |Delete from cursor to line start |
+|Ctrl-K |Delete from cursor to line end |
+|Ctrl-Shift-c |Copy selected text to clipboard |
+|Ctrl-Shift-V |Paste text from clipboard |
+|UP arrow |Recall previous command |
+|Down arrow | Scroll previous command |
+|Ctrl-R |Search command history |
+|Ctrl-C |Cancel command |
+
+### The Linux file system 
+Linux file system is generally a built-in layers of a linux operating system used to handle the data management of the storage. <br>It helps to arrange the file on the disk storage. It manages the file name, file size, creation date and much more information about a file.
+<br>A Linux file system is a structured collection of files on a drive or a partition. A partion is a segment of memory and contains some specific data. In our machine there can be various partitions of the memory. Generally, every partition contains a file system.<br>
+The Linux file system follows a tree-like hierarchical structure starting at the root. It consists of **directories, sub-directorires and data files**. This structure follows a standard layout recommended by FIlesystem Hierarchy Standard(FHS), which is standard maintained by the Linux Founndation.
+![file_system](sql-assets/filesystem.png)
+
 
 
 
