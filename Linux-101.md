@@ -81,12 +81,42 @@ ls --group-drirectories-first --human-readable
 ````
 
 ### Arguments 
-* Arguments tell the command what to operate on.
+* **Arguments tell the command what to operate on**.
 * it is usually a file, path, set of files or directories separated by spaces.
 * An argument can also be a string of text or something else.
 ````
 sort -u user.text
 ````
+### Troubleshooting Commands
+* Spacing matters 
+* Spelling of Command name matters
+* Misspelled commands usually will just fail
+* Mistyped options or arguments can cause unexpected outcomes or data loss.
+* Always double-check what you have typed before running it.
+
+### What commands can be used 
+* Most commands are programs installed on the system
+* Many common utilities come from the GNU coreutils.
+* The system provides ways for us to find programs
+
+### Finding help for commands 
+
+### **man** Command for Manual pages:
+* The command man opens the manual pages.
+* Manual pages are the built-in documentation for commands
+
+````
+man command name 
+e.g.
+username ~$ man ls
+checking the man pages for ls command 
+
+````
+
+
+
+
+
 
 
 |Command	|Usage |
