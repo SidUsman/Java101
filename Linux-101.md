@@ -281,7 +281,7 @@ $ stat Documents
 ````
         /home/sid/
         /home/sid/Documents
-   A Slash at the beginning indicates an absolute path 
+   (A Slash at the beginning indicates an absolute path) 
 ````
 ### Relative Paths 
 * Begin from the current working directory 
@@ -289,12 +289,39 @@ $ stat Documents
 ````
   Working Directory       Relative Path      Resulting Absolute Path   
   /home/sid               Documents           /home/sid/Documents
+  /home/youruser          Documents           /home/youruser/Documents  
+  
+  (NO SLASH AT THE BEGINNING OF THE RELATIVE PATH)
  ````
+* The name ".." refers to the parent directory of the current working directory.
+````
+  Working Directory       Relative Path      Resulting Absolute Path   
+  /home/sid               ..                 /home
+  /home/sid/Documents     ..                 /home/sid 
+  /home/sid/Pictures      ../Documents       /home/sid/Documents
+
+````
+
+### Tilde Expansion
+* The tilde character (~) refers to the current user's home directory.
+* My documents are at the path ~/ Documents
+* The shell expands the character ~ to the path of the user's home directory.
+````
+      ~/Documents ->  /home/sid/Documents
+      ~/Documents ->  /home/username/Documents   
+````
+
+-------------------------
+### cd 
+The cd command can be used to change into a subdirectory, move back into the parent directory, move all the way back to the root directory or move to any given directory.
 
 
 
-
-
+when there space in arguments, we will the error of "too many arguments" , to avoide that we have to tell Bash  that this space is part of the path not a seprator between two arguments or commands.
+There are two ways to do that:
+1. Put the path inside double quotes.
+2. Type a back-slash in front of space know that,escaping a character means it will be treated literally instead of any other special meaning.<br> If we have two spaces in there we need to escape each space character individually.
+3. 
 
 |Command	|Usage |
 |---|---|
