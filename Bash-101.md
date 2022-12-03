@@ -117,7 +117,7 @@ Expansions and substitutes allows us to specify values that are not known until 
 |$(...) |Command substitution |
 |$((...)) |Arithmetic expansion |
 
-### ~ 
+### Tilde expansion ~ 
 Tilde expansion represents the user's $HOME environment variable.
 ````
 $ echo ~
