@@ -50,6 +50,15 @@ count the number of line in this file
 ````
 $ ls > list.txt 
 
+$ cat << Endoftext
+>this is a
+>multiline 
+>text string 
+>Endoftext
+this is a 
+multiline 
+text string 
+
 ````
 |Stream |Name |Content |
 |---|---|---|
@@ -63,10 +72,77 @@ $ ls > list.txt
 #### simple bash script
 [Hello World in bash](scripts/first-script.sh)
 
+### Bash built-in and other commands
+* Many of the programs we use in Bash are commands.
+  * separate software that does not depend on Bash 
+* Bash includes built-in commands as well
+  * Part of bash itself 
+* Some Bash built-ins have the same name as other commands
+builtin take precedence on command 
+````
+$ echo Heloo there 
+Hello there 
+$ printf hello
+hello$
+
+$ command echo hello
+hello
+
+$ builtin echo hello
+hello
+
+$ command -V name_of_program 
+will tell us if the program is builtin or command 
+
+$ enable -n name_of_builtin
+to disable specific builtin in session 
+
+$ enable name_of_builtin
+to re-enable the builtin again 
+
+````
+
+--------------
+### Brackets and Braces in Bash 
+![braces](sql-assets/bracesplus.png)
+
+### Bash expansions and substitutes 
+Expansions and substitutes allows us to specify values that are not known until a script runs.
+
+|Representations | Name |
+|---|---|
+|~ | Tilde expansion |
+|{...} |Brace expansion |
+|${...} | Parameter expansion |
+|$(...) |Command substitution |
+|$((...)) |Arithmetic expansion |
+
+### ~ 
+Tilde expansion represents the user's $HOME environment variable.
+````
+$ echo ~
+/home/username
+
+$ echo ~-
+presents the dircetory you were just in 
+````
+
+### Brace expansion
+
+
+
+
+
+
 
 
 |Command | Description  |
 |---|---|
 |bash --version |Shows us which version of bash is installed |
 |echo $SHELL | TO check the default shell |
-|
+|command -V name_of_program |will tell us if the program is builtin or command |
+|enable -n name_of_builtin|to disable specific builtin in session |
+|enable name_of_builtin |to re-enable the builtin again |
+|help |list of all built-in |
+|help name_of_builtin |for info for that built-in |
+|echo ~- |old pwd |
