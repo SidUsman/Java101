@@ -13,10 +13,48 @@ Bourne again shell
 * If your workflow requires other more specialized tools Bash may not be the best choice for automation.
 
 
-
-
 ### Where to run Bash ?
+Bash is primarily used on Linux system but is available on macOS and Windows system.
 
+Using a Linux system, virtual machine or cloud instance is recommended to learn Bash.
+
+The included version of Bash on macOS is extremely outdated and may be removed in the future.
+
+To run Bash on Windows use GitBash or WSL or Linux VM .
+
+### Pipes and Redirection
+* **Pipes** send output of one process to another.
+* Pipes is very often used with grep, awk, cut and sed command.
+````
+$ ls | wc -l
+
+
+$ cat text.txt | less
+break output into pagess
+
+$ cat text.txt | wc
+    45   1856  12678
+count the number of line in this file 
+
+````
+* **Redirections** send streams(standard input, output and error) to or from files.
+* represented with > or < sign .
+
+|Symbol |Function |
+|---|---|
+|> | output redirection (turncate ) <br> take whatever redirected and overwrite the contents of destination file  |
+|>> |Output redirection (append ) <br> add to the end of the existing file |
+|< |Input redirection |
+|<< |Here document <br>Allows you to pass multiple lines if input to a command.|
+````
+$ ls > list.txt 
+
+````
+|Stream |Name |Content |
+|---|---|---|
+|0 |Standard input (stdin) |Keyboard or other input |
+|1 |Standard output (stdout ) |Regular output |
+|2 |Standard error (stderr) |Output marked as 'error' |
 
 
 ### what is bash scripting
