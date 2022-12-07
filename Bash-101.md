@@ -258,7 +258,29 @@ $ echo $(( 4 / 5 ))
 
 **Executable Bash script :**
 * Includes a shebang as the first line (#!/usr/bin/env bash)
-* 
+
+**Running bash script:**
+* Bash script run inside a interactive shell
+* You can change options for the subshell with set or shopt on the script.
+* Scripts help avoid typos and allow easier sharing of Bash code.
+
+````
+$ code myscrip
+--------------
+#!/usr/bin/env bash
+echo "hello"
+
+# This is a comment
+echo "there"
+-------------------
+$ chmod +x myscript
+$ 
+$ ./myscript
+hello
+there
+````
+-------------------
+### 
 
 
 
