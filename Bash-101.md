@@ -208,7 +208,9 @@ h_llo there
 ### Command and substitutions $(...)
 * Command substitution puts the output of one command inside another.
 * Older representation : `...`
-* 
+* Bash run the specified command in a subshell and return the output of that into the current command.
+* Often used with string manipulation tools to extract part of command's output, such as a file size, an IP address or so on that needed to be handed back to the parent command.
+
 ````
  % uname -r
 20.6.0
@@ -219,6 +221,46 @@ the kernel is 20.6.0.
  % echo "the python is $(python -V)."
 the python is Python 3.9.12.
 ````
+
+--------------
+### Arithmetic expansion $((...))
+* Arithmetic expression does calculation.
+* Older representation: $[...]
+* Bash can use arithmetic expansion to perform arithmetic or calculations and use the result in a command. 
+
+````
+$ echo $((2 + 2))
+4
+
+$ echo $(( 4 - 4))
+2
+
+$ echo $((4 * 5))
+20
+
+$ echo $(( 4 / 5 ))
+0
+
+````
+
+--------
+### Bash Scripts syntax
+
+**One-liners :**
+* Many commands presented in one line of text
+* Often piped commands or command separated by semicolon.
+* Can be very long( and even warp), but there's on newline until the end.
+* Often stored in a note for frequent use.
+
+**Bash script :**
+* Text file that contains a series of commands
+* Bash myscript.sh
+
+**Executable Bash script :**
+* Includes a shebang as the first line (#!/usr/bin/env bash)
+* 
+
+
 
 
 
