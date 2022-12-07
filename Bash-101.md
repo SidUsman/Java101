@@ -128,7 +128,97 @@ presents the dircetory you were just in
 ````
 
 ### Brace expansion
+* Brace expansion creates sets or ranges. 
+* This is written with braces around an expansion.
+* Lets us substitute an item from a list of values separated by commas or range of numbers or letters in a given pattern, separated by two dots or periods.
+* used when we need to keep part of a path the same but replace a little piece of it.
+  * e.g. if we want to create a file inside each of three different directory trees where only part where only part of a path need to change each time.
+  * could be used to provide a set of values to use in the same part of a string more generally.
+* used working with sequential items .
+````
+$ echo {1..10}
+1 2 3 4 5 6 7 8 9 10
 
+sidradev@Mac-5 java101 % echo {10..1}
+10 9 8 7 6 5 4 3 2 1
+
+$ echo {01..100}
+001 002 003 004 005 006 007 008 009 010 011 012 013 014 015 016 017 018 019 020 021 022 023 024 025 026 027 028 029 030 031 032 033 034 035 036 037 038 039 040 041 042 043 044 045 046 047 048 049 050 051 052 053 054 055 056 057 058 059 060 061 062 063 064 065 066 067 068 069 070 071 072 073 074 075 076 077 078 079 080 081 082 083 084 085 086 087 088 089 090 091 092 093 094 095 096 097 098 099 100
+(number 1 to 100 padded with 0)
+
+$ echo {a..z}
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+$ echo {Z..A}
+Z Y X W V U T S R Q P O N M L K J I H G F E D C B A
+
+$ echo {1..30..3}
+1 4 7 10 13 16 19 22 25 28
+(every third number between 1 and 30 )
+
+$ echo {a..z..2}
+a c e g i k m o q s u w y
+(return every other letter between a and z)
+
+$ touch file_{01..12}{a..d}
+(create 48 file with sequential name )
+
+ % touch {01..05}{a..c}
+ % ls
+01a		02c		04b		Bash-101.md	sql-assets
+01b		03a		04c		Linux-101.md	sql-learning.md
+01c		03b		05a		README.md
+02a		03c		05b		learning-vim
+02b		04a		05c		scripts
+
+
+````
+------------------
+### Parameter expansions ${...}
+Parameter expansion retrieve and transforms stored values.
+* Sometime can be used without brackets 
+* Used to extract sub-strings or manipulating the value of parameter as its being used.
+* to replace a particular word or value
+* 
+````
+
+$ greating="hello there"
+$ echo $greating
+hello there 
+
+$ echo ${greating:6}
+there
+(print greating starting from 6th character)
+
+$ echo ${greating:6:3}
+the
+(print greating starting from 6th character for 3 characters)
+
+% echo ${greating/there/everybody}
+hello everybody
+
+ % echo ${greating//e/_}
+h_llo th_r_
+
+ % echo ${greating/e/_}
+h_llo there
+````
+
+-------------------
+### Command and substitutions $(...)
+* Command substitution puts the output of one command inside another.
+* Older representation : `...`
+* 
+````
+ % uname -r
+20.6.0
+
+ % echo "the kernel is $(uname -r)."
+the kernel is 20.6.0.
+
+ % echo "the python is $(python -V)."
+the python is Python 3.9.12.
+````
 
 
 
