@@ -519,12 +519,38 @@ $ [ ! 4 -lt 3 ]; echo $?
 **Regular expressions:**
 A regular expression (regex) is a text pattern that can be used for searching and replacing. Regular expressions are similar to Unix wild cards used in globbing, but much more powerful, and can be used to search, replace and validate text.
 
-|||
-|---|---|
-|||
-
-
 ````
+$ [[ 4 -lt 3 ]];echo $?
+1
+$ [[ -d ~ && -a /bin/bash ]]; echo $?
+0
+$ [[ -d ~ && -a /bin/mash ]]; echo $?
+1
+$ [[ -d ~ || -a /bin/mash ]]; echo $?
+0
+$ [[ -d ~ ]] && echo ~ is a directory
+/home/codespace is a directory
+$ [[ -d /bin/bash ]] && echo /echo /bin/bash is a directory
+$ l && echo "listed the directory"
+CONTRIBUTING.md  dir3/      myscript*  Snippets.md
+dir1/            LICENSE    NOTICE     Solutions/
+dir2/            lorem.txt  README.md
+listed the directory
+$ true && echo "success!"
+success!
+$ false && echo "success"
+
+$ [[ "cat" =~ c.* ]]; echo $?
+0
+$ [[ "bat" =~ c.* ]]; echo $?
+1
+````
+
+======================
+
+### Formatting and styling text output 
+### echo -e ...
+Interprets escaped characters like \t, \n, \a and other control characters.
 
 
 
