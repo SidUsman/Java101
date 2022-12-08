@@ -552,7 +552,17 @@ $ [[ "bat" =~ c.* ]]; echo $?
 ### echo -e ...
 Interprets escaped characters like \t, \n, \a and other control characters.
 
+````
+$ echo -e "Name\t\tNumber"; echo -e "Sid\t\t123"
+Name            Number
+Sid             123
+$ echo -e "This text\nbreaks over\nthree lines"
+This text
+breaks over
+three lines
+$ echo -e "\a"
 
+````
 
 
 
