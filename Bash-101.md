@@ -468,6 +468,64 @@ $ echo $(( 1+ RANDOM % 10))
 
 ````
 
+==========================
+### [...]
+#### Comparing values with test 
+
+[ is an alias for the test builr-in and is used to test or evaluate expressions.
+
+
+**Exit or Return Status:**
+* The shell returns a status code after a command completes
+* 0 means success.
+* 1 means failure.
+* 0 and 1 can be treated as truth values ( 0= true , 1= false )
+* With truth values we can apply logic to our scripts 
+* The return status is treated as the value of the command.
+
+````
+$ [ -d ~ ]
+$ echo $?
+0
+$ [ -d /bin/bash ]; echo $?
+1
+$ [ -d /bin ]; echo $?
+0
+$ [ "cat" = "dog" ]; echo $?
+1
+$ [ "cat" = "cat" ]; echo $?
+0
+
+$ [ 4 -lt 5 ]; echo $?
+0
+$ [ 4 -lt 5 ]; echo $?
+0
+$ [ 4 -lt 3 ]; echo $?
+1
+$ [ ! 4 -lt 5 ]; echo $?
+1
+$ [ ! 4 -lt 3 ]; echo $?
+0
+````
+==========
+### [[...]]
+#### Comparing values with extended test
+
+* Extended test supports comparisons that test runs and add other features.
+* Extended test offers more features
+* Test is more widely used with other shells.
+* we can use more than one expression with in a text to create a little more complex logic.
+
+**Regular expressions:**
+A regular expression (regex) is a text pattern that can be used for searching and replacing. Regular expressions are similar to Unix wild cards used in globbing, but much more powerful, and can be used to search, replace and validate text.
+
+|||
+|---|---|
+|||
+
+
+````
+
 
 
 
