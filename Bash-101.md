@@ -280,7 +280,197 @@ hello
 there
 ````
 -------------------
-### 
+### Displaying text with "echo"
+* Prints text to standard output.
+* Type echo followed by whatever you want to output.
+* echo...
+* Print text to standard output, we can compose strings and variables and substitution in one echo statement.  
+
+````
+$ echo hello
+hello
+$ echo hello world
+hello world
+$ 
+$ worldsize=big
+$ 
+$ echo hello $worldsize world
+hello big world
+$ 
+$ echo "The kernel is $(uname -r)."
+The kernel is 5.4.0-1094-azure.
+$ 
+$ echo The kernel is $(uname -r).
+The kernel is 5.4.0-1094-azure.
+$ 
+$ echo the kernel is $(uname -r)
+the kernel is 5.4.0-1094-azure
+$ 
+$ echo the (kernel) is $(uname -r)
+bash: syntax error near unexpected token `('
+$ echo the \(kernel\) is $(uname -r).
+the (kernel) is 5.4.0-1094-azure.
+$ 
+$ echo 'the kernel is $(uname -r).'
+the kernel is $(uname -r).
+$ 
+$ echo
+
+$ echo;echo "more space!" ;echo
+
+more space!
+
+$ echo -n "no newline"
+no newline$ echo -n "part of"; echo -n " a statement"
+part of na statement$
+````
+
+------------
+### working with variables
+* Variable allow us to store and retrieve values by name.
+* Bash variables are special case of Parameter substitution
+* variables are named with alphanumeric characters
+* Variable names are case-sensitive 
+* For example:mygreeting=Hello
+* use a $ sign in front of variable name.
+* $variable
+
+````
+$ mygreeting=Hello
+$ mygreeting2="Good morning!"
+$ number=16
+$ 
+$ echo $mygreeting
+Hello
+$ 
+$ echo $mygreeting2
+Good morning!
+$ 
+$ echo $number
+16
+$ 
+$ declare -r variable=value
+(you can not change the variable value later on anywhere)
+
+$declare -l lowerstring="this is some TEXT "
+(what ever it gets change it to lower-case)
+
+$declare -u upperstring="This is some TEXT!"
+(change to upper case)
+````
+
+-------------
+### Working with numbers 
+
+**$((...))**
+Arithmetic expansion returns the result of mathematical operations.
+Older representation : $[...]
+
+**((...))**
+Arithmetic evaluation performs calculations and changes the value of variables.
+
+Supported Arithmetic Operations:
+|Operation |Operator |
+|---|---|
+|Addition | + |
+|Subtraction | - |
+|Multiplication | * |
+|Division | / |
+|Modulo | % |
+|Exponentiation | ** |
+
+Note: Bash only supports integer calculations.
+
+````
+$ echo $((4+4))
+8
+
+$ echo $((8-5))
+3
+$ echo $((2*3))
+6
+$ echo $((8/4))
+2
+
+ echo $(( (3+6) - 5 * (5*2) ))
+-41
+$ 
+$ a=3
+$ ((a+=3))
+$ echo a
+a
+$ echo $a
+6
+$ ((a++))
+$ echo $a
+7
+$ ((a++))
+$ echo $a
+8
+$ ((a--))
+$ echo $a
+7
+$ ((a+=2))
+$ echo $a
+9
+$ ((a-=3))
+$ echo $a
+6
+$ ((a*=2))
+$ echo $a
+12
+$ ((a/=2))
+$ echo $a
+6
+$ 
+$ b=5
+$ echo $b
+5
+$ b=$b+2
+$ echo $b
+5+2
+$ #treats it like a string
+$ #so we need to declare it as interger 
+$ 
+$ declare -i b=3
+$ echo $b
+3
+$ b=$b+4
+$ 
+$ echo $((1/3))
+0
+## will give the result in whole number 
+## to do more precise calculations consider bc or awk
+````
+````
+$ declare -i c=1
+$ declare -i d=3
+$ declare -i b=3
+
+$ e=$(echo "scale=3; $c/$d" | bc)
+$ echo $e
+.333
+$ #this response is treated by bash as text by bash 
+$ 
+$ #random
+$ echo $RANDOM
+29887
+$ echo $RANDOM
+22800
+$ echo $RANDOM
+22357
+$ 
+$ echo $(( 1+ RANDOM % 10))
+8
+
+$ echo $(( 1+ RANDOM % 10))
+9
+
+````
+
+
+
+
 
 
 
