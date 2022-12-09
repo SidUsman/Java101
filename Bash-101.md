@@ -563,7 +563,53 @@ three lines
 $ echo -e "\a"
 
 ````
+````
+# text formating instructions:
+# in myscript;
+         "\foreground[backgroundm
+````
+![texformating](sql-assets/formating1.png)
+![textformating_bash](sql-assets/formating2.png)
 
+#### Common Terminal colors and Styles
+
+|Color |FG |BG |
+|---|---|---|
+|Black |30 |40|
+|RED |31 |41 |
+|Green |32 |42 |
+|Yellow |33 |43 |
+|Blue |34 | 44 |
+|Magenta |35 |45 |
+|Cyan |36 |46 |
+|White |37 |47 |
+
+|Color |FG |BG |
+|---|---|---|
+|Bright Black |90 |100|
+|Bright RED |91 |101 |
+|Bright Green |92 |102 |
+|Bright Yellow |93 |103 |
+|Bright Blue |94 | 104 |
+|Bright Magenta |95 |105 |
+|Bright Cyan |96 |106 |
+|Bright White |97 |107 |
+
+|Style | |
+|---|---|
+|Reset | 0 |
+|Bright | 1 |
+|Dim  |2 |
+|Italic |3|
+|Underlined |4 |
+|Blinking |5|
+|Inverted |7 |
+|Strikethrough |9 |
+
+==================
+
+### printf "..."
+Outputs text using placeholders and formatting 
 
 
 
