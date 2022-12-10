@@ -611,8 +611,149 @@ $ echo -e "\a"
 ### printf "..."
 Outputs text using placeholders and formatting 
 
+**Using Placeholders with Printf :**
+![placeholder](sql-assets/placeH_f.png)
+
+````
+# myscript:
+ 
+echo "----10----| --5--"
+
+echo "Right-aligned text and digits"
+printf "%10s: %5d\n" "A Label" 123 "B Label" 456
+
+echo "Left-aligned text, right-aligned digits"
+printf "%-10s: %5d\n" "A Label" 123 "B Label" 456
+
+echo "Left-aligned text and digits"
+printf "%-10s: %-5d\n" "A Label" 123 "B Label" 456
+
+echo "Left-aligned text, right-aligned and padded digits"
+printf "%-10s: %05d\n" "A Label" 123 "B Label" 456
+
+echo "----10----| --5--"
+
+--------------------------------------
+#terminal 
+
+$ ./myscript
+----10----| --5--
+Right-aligned text and digits
+   A Label:   123
+   B Label:   456
+Left-aligned text, right-aligned digits
+A Label   :   123
+B Label   :   456
+Left-aligned text and digits
+A Label   : 123  
+B Label   : 456  
+Left-aligned text, right-aligned and padded digits
+A Label   : 00123
+B Label   : 00456
+----10----| --5--
+$ 
+
+````
+![dateformat](sql-assets/dateformat.png)
+
+------------------------
+### Arrays in Bash
+Array let sus store multiple values .
+
+Bash supports two types of array:
+1. Indexed 
+2. Associated arrays
 
 
+````
+$ declare -a snacks=("apple" "banana" "orange")
+
+$ echo ${snacks[2]}
+orange
+
+$ snacks[5]="grapes"
+$ snacks+=("mango")
+
+$ echo ${snacks[@]}
+apple banana orange grapes mango
+$ 
+$ for i in {0..6}; do echo "$i: ${snacks[$i]}"; done
+0: apple
+1: banana
+2: orange
+3: 
+4: 
+5: grapes
+6: mango
+````
+````
+$ declare -A office
+$ office[city]="Hamilton"
+$ office["building name"]="HQ West"
+
+$ echo ${office["building name"]}
+HQ West
+
+$ echo ${office["building name"]} is in ${office[city]}
+HQ West is in Hamilton
+$ 
+````
+-----------------------
+### Conditional statements with the "if" keyword 
+````
+if ...
+then
+  ...
+fi
+````
+If statement execute code based on a conditional expression.
+
+**Control structure in Bash:**
+* Allow us to control how script execution happens 
+* Run specifies code based on conditions
+
+![ifstatement](sql-assets/)
+
+
+-------------------
+### while loop
+
+
+----------------
+### for loop
+
+-------------------
+### case
+
+--------------------
+### Functions
+Function allows
+
+need to be declared before their use
+
+-------------------
+### Reading and Writing text files
+
+
+---------------
+### Arguments
+* Allow us to pass information into a script from the CLI
+* Are text that represented by 
+
+
+------------
+### Options
+* Allow us to pass information into a script from the CLI
+* Are a com
+
+
+
+-------------------
+### Getting input during execution
+
+
+------------------
+### Ensuring a response
 
 
 
