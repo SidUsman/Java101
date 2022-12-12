@@ -712,8 +712,47 @@ If statement execute code based on a conditional expression.
 * Allow us to control how script execution happens 
 * Run specifies code based on conditions
 
-![ifstatement](sql-assets/)
+![ifstatement](sql-assets/if_statement.png)
 
+````
+#script
+
+declare -i a=3
+
+if [[ $a -gt 4 ]]; then
+    echo "$a is greater than 4!"
+else
+    echo "$a is not greater than 4!"
+fi
+
+--------------
+# terminal
+
+$ ./myscript
+3 is not greater than 4!
+$ 
+````
+````
+# script
+
+declare -i a=3
+
+if [[ $a -gt 4 ]]; then
+    echo "$a is greater than 4!"
+elif (( $a > 2 )); then
+    echo "$a is greater than 2."
+else
+    echo "$a is not greater than 4!"
+fi
+
+-----------------------
+#terminal
+
+$ ./myscript
+3 is greater than 2.
+$ 
+
+````
 
 -------------------
 ### while loop
