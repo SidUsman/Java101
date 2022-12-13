@@ -757,9 +757,197 @@ $
 -------------------
 ### while loop
 
+1. While loops run as long as their condition is true.
+````
+While ....
+do
+  ...
+done
+````
+
+2. Until loops run as long as their condition is false.
+````
+until ...
+do
+  ...
+done
+````
+Example:
+````
+#script
+
+declare -i n=0
+while (( n < 9 ))
+do
+    echo "n:$n"
+    ((n++))
+done
+
+-----------------------------------------
+#terminal
+
+$ ./myscript
+n:0
+n:1
+n:2
+n:3
+n:4
+n:5
+n:6
+n:7
+n:8
+
+````
+````
+#script
+
+declare -i n=0
+until (( n == 11 ))
+do 
+    echo "n:$n"
+    ((n++))
+done
+
+------------------
+#terminal
+
+$ ./myscript
+n:0
+n:1
+n:2
+n:3
+n:4
+n:5
+n:6
+n:7
+n:8
+n:9
+n:10
+````
 
 ----------------
 ### for loop
+For loops iterate through a list of items, running code once for each item.
+````
+for i in ....
+do
+  ...
+done
+````
+Examples:
+````
+for i in 1 2 3 4
+do
+    echo $i
+done
+-------------
+ ./myscript
+1
+2
+3
+4
+````
+````
+for i in {1..10}
+do
+    echo $i
+done
+-------------
+$ ./myscript
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+````
+````
+for (( i=1; i<=5; i++ ))
+do
+    echo $i
+done
+-------------
+$ ./myscript
+1
+2
+3
+4
+5
+````
+````
+#!/usr/bin/env bash
+declare -a fruits=("apple" "banana" "plum")
+for i in ${fruits[@]}
+do
+    echo $i
+done
+-------
+$ ./myscript
+apple
+banana
+plum
+````
+````
+declare -A arr
+arr["Name"]="Usman"
+arr["id"]="6075"
+for i in "${!arr[@]}"
+do
+    echo $i: "${arr[$i]}"
+done
+------
+$ ./myscript
+id: 6075
+Name: Usman
+````
+````
+for i in $(ls)
+do
+    echo "Found a file: $i"
+done
+------
+$ ./myscript
+Found a file: CONTRIBUTING.md
+Found a file: dir1
+Found a file: dir2
+Found a file: dir3
+Found a file: LICENSE
+Found a file: lorem.txt
+Found a file: myscript
+Found a file: NOTICE
+Found a file: README.md
+Found a file: Snippets.md
+Found a file: Solutions
+````
+````
+for i in *
+do
+    echo "Found a file: $i"
+done
+--------------------------------------
+$ ./myscript
+Found a file: CONTRIBUTING.md
+Found a file: dir1
+Found a file: dir2
+Found a file: dir3
+Found a file: LICENSE
+Found a file: lorem.txt
+Found a file: myscript
+Found a file: NOTICE
+Found a file: README.md
+Found a file: Snippets.md
+Found a file: Solutions
+````
+=================================
+
+
+
+
+
 
 -------------------
 ### case
