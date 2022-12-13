@@ -507,7 +507,7 @@ $ [ ! 4 -lt 5 ]; echo $?
 $ [ ! 4 -lt 3 ]; echo $?
 0
 ````
-==========
+---------------------------------
 ### [[...]]
 #### Comparing values with extended test
 
@@ -943,12 +943,6 @@ Found a file: README.md
 Found a file: Snippets.md
 Found a file: Solutions
 ````
-=================================
-
-
-
-
-
 
 -------------------
 ### case
