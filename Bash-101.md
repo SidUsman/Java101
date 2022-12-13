@@ -1,6 +1,6 @@
 # Learning Bash Scripting
 ### What is bash?
-Bash is a shell, a program lets us interact with a computer giving us access to programs, hardware resources and files stored on the system.
+Bash is a shell, a program lets us interact with a computer giving us access to program, hardware resources and files stored on the system.
 Bourne again shell
 * Bash is widely used shell, available on many platforms.
 * Short for bourne Again Shell, in interference to the earlier Bourne shell.
@@ -260,12 +260,12 @@ $ echo $(( 4 / 5 ))
 * Includes a shebang as the first line (#!/usr/bin/env bash)
 
 **Running bash script:**
-* Bash script run inside a interactive shell
+* Bash script run inside an interactive shell
 * You can change options for the subshell with set or shopt on the script.
 * Scripts help avoid typos and allow easier sharing of Bash code.
 
 ````
-$ code myscrip
+$ code myscript
 --------------
 #!/usr/bin/env bash
 echo "hello"
@@ -468,11 +468,11 @@ $ echo $(( 1+ RANDOM % 10))
 
 ````
 
-==========================
+---------------------------------------
 ### [...]
 #### Comparing values with test 
 
-[ is an alias for the test builr-in and is used to test or evaluate expressions.
+" [" is an alias for the test built-in and is used to test or evaluate expressions.
 
 
 **Exit or Return Status:**
@@ -546,7 +546,8 @@ $ [[ "bat" =~ c.* ]]; echo $?
 1
 ````
 
-======================
+----------------------------------------------------------------------
+
 
 ### Formatting and styling text output 
 ### echo -e ...
@@ -606,7 +607,7 @@ $ echo -e "\a"
 |Inverted |7 |
 |Strikethrough |9 |
 
-==================
+------------------------------------------------
 
 ### printf "..."
 Outputs text using placeholders and formatting 
@@ -712,7 +713,7 @@ If statement execute code based on a conditional expression.
 * Allow us to control how script execution happens 
 * Run specifies code based on conditions
 
-![ifstatement](sql-assets/if_statement.png)
+![if_statement](sql-assets/if_statement.png)
 
 ````
 #script
