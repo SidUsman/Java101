@@ -946,12 +946,157 @@ Found a file: Solutions
 
 -------------------
 ### case
+* Checks an input against a set of predefined values.
+* Runs code when an input matches a condition.
+````
+animal="dog"
+case $animal in 
+    bird) echo "Avian";;
+    dog|puppy) echo "Canine";;
+    *) echo "No match";;
+esac
+----------------
+$ ./myscript
+Canine
+$ 
+````
+````
+animal="elephant"
+case $animal in 
+    bird) echo "Avian";;
+    dog|puppy) echo "Canine";;
+    *) echo "No match";;
+esac
+-----------------------------
+$ ./myscript
+No match
+````
+
+
 
 --------------------
-### Functions
-Function allows
+### Functions fname()
+* Functions allow us to repeatedly call a piece of code.
+* Older version: function fname {...}
+* Functions need to be declared before their use.
+* Function Variables
+  * $@ : Represent the list of arguments given to a function
+  * $FUNCNAME represent the name of a function.
 
-need to be declared before their use
+````
+fname() {
+  ...
+}
+````
+````
+greet(){
+    echo "Hello there!"
+}
+
+echo "And now, a greeting"
+greet
+-------------
+$ ./myscript
+And now, a greeting
+Hello there!
+````
+**Adding 1st argument with $1**
+````
+greet() {
+    echo "Hi there, $1"
+}
+
+echo "And now, a greeting..."
+greet SID 
+------------
+$ ./myscript
+And now, a greeting...
+Hi there, SID
+````
+**Passing 2 arguments in a function:**
+````
+
+greet() {
+    echo "Hi there, $1. What a nice $2"
+}
+
+echo "And now, a greeting..."
+greet SID afternoon
+greet Usman evening!
+--------------------------------------------
+$ ./myscript
+And now, a greeting...
+Hi there, SID. What a nice afternoon
+Hi there, Usman. What a nice evening!
+$ 
+````
+````
+numberthing() {
+    declare -i i=1
+    for f in $@; do
+        echo "$i: $f"
+        (( i += 1 ))
+    done
+    echo "This counting was brought to you by $FUNCNAME."
+}
+
+numberthing "$(ls /)"
+echo
+numberthing pine birch maple spruce
+------------------------------------------------
+$ ./myscript
+1: bin
+2: boot
+3: dev
+4: etc
+5: get-pip.py
+6: go
+7: home
+8: lib
+9: lib32
+10: lib64
+11: libx32
+12: media
+13: mnt
+14: opt
+15: proc
+16: root
+17: run
+18: sbin
+19: srv
+20: sys
+21: tmp
+22: usr
+23: var
+24: vscode
+25: workspaces
+This counting was brought to you by numberthing.
+
+1: pine
+2: birch
+3: maple
+4: spruce
+This counting was brought to you by numberthing.
+$ 
+````
+**Local variable:**
+````
+var1="I'm variable 1"
+
+myfunction() {
+    var2="I'm variable 2"
+    local var3="I'm variable 3"
+}
+myfunction
+
+echo $var1
+echo $var2
+echo $var3
+-------------------
+$ ./myscript
+I'm variable 1
+I'm variable 2
+````
 
 -------------------
 ### Reading and Writing text files
