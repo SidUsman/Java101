@@ -1100,33 +1100,343 @@ I'm variable 2
 
 -------------------
 ### Reading and Writing text files
+* Write files with output redirection oeperators (> and >>)
+  * echo "abc" > out.txt overwrites the contents of out.txt
+  * echo "abc" >> out.txt appends to the end of out.txt
+* Reading from file with input redirection(<) and read command
+  * while read line; do echo $line; done < in.txt
 
+
+  
+**Write a file:**
+````
+for i in 1 2 3 4 5
+do
+    echo "This is line $i" > ~/textfile.txt
+done
+---------------
+$ ./myscript
+This is line 1 > ~/textfile.txt
+This is line 2 > ~/textfile.txt
+This is line 3 > ~/textfile.txt
+This is line 4 > ~/textfile.txt
+This is line 5 > ~/textfile.txt
+$ 
+````
+````
+for i in 1 2 3 4 5
+do
+    echo "This is line $i" > textfile.txt 
+done
+--------------
+$ ./myscript
+$ cat textfile.txt
+This is line 5
+````
+
+````
+$ rm textfile.txt
+---------------
+for i in 1 2 3 4 5
+do
+    echo "This is line $i" >> textfile.txt 
+done
+-------------------------
+$ ./myscript
+
+$ cat textfile.txt
+This is line 1
+This is line 2
+This is line 3
+This is line 4
+This is line 5
+$ 
+````
+**Read a file:**
+````
+while read f
+    do echo "I read a line an it says: $f"
+done < textfile.txt
+----------------
+$ ./myscript
+I read a line and it says: This is line 1
+I read a line and it says: This is line 2
+I read a line and it says: This is line 3
+I read a line and it says: This is line 4
+I read a line and it says: This is line 5
+
+````
 
 ---------------
 ### Arguments
+**Arguments in BAsh Scripting:**
 * Allow us to pass information into a script from the CLI
-* Are text that represented by 
+* Arguments are text that represented by a string, a filename and so on.
+* Arguments are represented by numbered variables ($1, $2 ,...)
+
+````
+echo "The $0 script got the argument: $1"
+echo "Argument 2 is: $2"
+----------
+$ ./myscript Apple
+The ./myscript script got the argument: Apple
+$ ./myscript Apple Orange
+The ./myscript script got the argument: Apple
+Argument 2 is: Orange
+$ ./myscript Apple Pie
+The ./myscript script got the argument: Apple
+Argument 2 is: Pie
+$ 
+````
+````
+for i in "$@"
+do 
+    echo $i
+done
+
+echo "there are $# arguments "
+------------
+$ ./myscript dog cat "blue river" bird 
+dog
+cat
+blue river
+bird
+there are 4 arguments 
+$ 
+````
 
 
 ------------
-### Options
+### Options in Bash Scripting
 * Allow us to pass information into a script from the CLI
-* Are a com
+* Are a combination of a dash and a  letter (like -u or -p)
+* Are accessed using the "getopts" keyword
+* Can accept arguments of their own
+* Can be specified and used in any order
 
+````
+while getopts u:p: option; do
+    case $option in
+        u) user=$OPTARG;;
+        p) pass=$OPTARG;;
+    esac
+done
 
+echo "user: $user / pass: $pass"
+--------------------------------------
+$ ./myscript -u usman -p jehdebd
+user: usman / pass: jehdebd
+$ 
+````
+````
+while getopts u:p:ab option; do
+    case $option in
+        u) user=$OPTARG;;
+        p) pass=$OPTARG;;
+        a) echo "got the A flag";;
+        b) echo "got the B flag";;
+    esac
+done
+
+echo "user: $user / pass: $pass"
+--------------------------------
+$ ./myscript -u SID -p jhdjhd
+user: SID / pass: jhdjhd
+$ ./myscript -u SID -p jhdjhd -a 
+got the A flag
+user: SID / pass: jhdjhd
+$ ./myscript -u SID -p jhdjhd -ab
+got the A flag
+got the B flag
+user: SID / pass: jhdjhd
+$ 
+````
+````
+while getopts :u:p:ab option; do
+    case $option in
+        u) user=$OPTARG;;
+        p) pass=$OPTARG;;
+        a) echo "got the A flag";;
+        b) echo "got the B flag";;
+        ?) echo "I don't know what that $OPTARG is"
+    esac
+done
+
+echo "user: $user / pass: $pass"
+
+---------------
+$ ./myscript -u SID -p jhdjhd -abc
+got the A flag
+got the B flag
+I don't know what that c is
+user: SID / pass: jhdjhd
+$ 
+````
 
 -------------------
 ### Getting input during execution
+**Gathering input Interactively :**
+* Scripts often need input as they run 
+* The read keyword allows us to gather input, passing the script until input is provided.
+* Input is stored in a variable.
 
 
+````
+echo "What is your name?"
+read name 
+
+echo "What is your Password?"
+read -s pass 
+
+read -p "What is your favorite animal?  " animal
+
+echo name: $name, pass: $pass, animal: $animal
+----------------------------------------------------
+$ ./myscript
+What is your name?
+Sid
+What is your Password?
+What is your favorite animal?  cat
+name: Sid, pass: asdf, animal: cat
+$ 
+
+````
+
+````
+select animal in "bird" "dog" "fish"
+do 
+    echo "you selected $animal"
+    break
+done
+--------------------------------------
+$ ./myscript
+1) bird
+2) dog
+3) fish
+#? 2
+you selected dog
+$ 
+
+````
+````
+select animal in "bird" "dog" "fish" "quit"
+do 
+    case $animal in 
+        bird) echo "Birds like to fly.";;
+        dog) echo "Dogs like to catch.";;
+        fish) echo "Fish like to swim.";;
+        quit) break;;
+        *) echo "I am not sure what that is !"
+    esac
+done
+---------------------------------------------
+$ ./myscript
+1) bird
+2) dog
+3) fish
+4) quit
+#? 2
+Dogs like to catch.
+#? 1
+Birds like to fly.
+#? 3
+Fish like to swim.
+#? 8
+I am not sure what that is !
+#? 4
+$ 
+````
 ------------------
 ### Ensuring a response
+User ignoring input prompts causes problem.
+There are few ways to deal with it
+1. Using -i option and suggesting a response.
+````
+read -ep "Favorite color? " -i "Blue" favcolor
+echo $favcolor
+--------------------------
+$ ./myscript
+Favorite color?Blue
+Blue
+$ ./myscript
+Favorite color? red
+red
+$ 
+
+````
+2. Using # sign variable .
+````
+if (($#<3)); then
+    echo "This command requires three arguments:"
+    echo "username, userid, and favorite number."
+else
+    # the program goes here
+    echo "username: $1"
+    echo "userid: $2"
+    echo "favorite number: $3"
+fi
+-------------------------
+$ ./myscript SID
+This command requires three arguments:
+username, userid, and favorite number.
+$ ./myscript SID 456 8
+username: SID
+userid: 456
+favorite number: 8
+$ 
+
+````
+3. Setting up a loop.
+````
+read -p "Favorite animal? " fav
+while [[ -z $fav ]]
+do
+        read -p "I need an answer! " fav
+done
+
+echo "$fav was selected."
+---------------------------
+$ ./myscript
+Favorite animal? 
+I need an answer! cat
+cat was selected.
+$ 
+
+````
+4. using read and if command .
+````
+read -p "Favorite animal? " fav
+if [[ -z $fav ]]; then
+    fav="cat"
+fi
+echo "$fav was selected"
+
+-------------------
+$ ./myscript
+Favorite animal? dog
+dog was selected
+$ ./myscript
+Favorite animal? 
+cat was selected
+$ 
+````
 
 
+5. rejecting input that doesnt not pass avaluation :
+````
+read -p "What year? [nnnn] " year
+until [[ $year =~ [0-9]{4} ]]; do
+        read -p "A year, please! [nnnn] " year
+done
+echo "Selected year: $year"
+------------------
+$ ./myscript
+What year? [nnnn] 99
+A year, please! [nnnn] 1991
+Selected year: 1991
+````
 
-
-
-
+-----------------------
 
 |Command | Description  |
 |---|---|
