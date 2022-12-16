@@ -71,7 +71,7 @@ text string
 ### what is bash scripting
 #### simple bash script
 [Hello World in bash](scripts/first-script.sh)
-
+----------------------------
 ### Bash built-in and other commands
 * Many of the programs we use in Bash are commands.
   * separate software that does not depend on Bash 

@@ -317,11 +317,10 @@ The cd command can be used to change into a subdirectory, move back into the par
 
 
 
-when there space in arguments, we will the error of "too many arguments" , to avoide that we have to tell Bash  that this space is part of the path not a seprator between two arguments or commands.
+when there space in arguments, we will the error of "too many arguments" , to avoid that we have to tell Bash  that this space is part of the path not a seprator between two arguments or commands.
 There are two ways to do that:
 1. Put the path inside double quotes.
 2. Type a back-slash in front of space know that,escaping a character means it will be treated literally instead of any other special meaning.<br> If we have two spaces in there we need to escape each space character individually.
-3. 
 
 |Command	|Usage |
 |---|---|
